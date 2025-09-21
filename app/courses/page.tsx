@@ -1,6 +1,6 @@
 import CourseCard from '@/components/CourseCard';
 import CourseFilters from '@/components/CourseFilters';
-import { PageShell } from 'modules/shell';
+import { PageShell } from '@/modules/shell';
 import { courseCategories, courseLevels, courses } from '@/app/data/courses';
 
 export default function CoursesPage({

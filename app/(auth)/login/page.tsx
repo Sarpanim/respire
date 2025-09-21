@@ -1,5 +1,5 @@
 import LoginForm from '@/components/LoginForm';
-import { PageShell } from 'modules/shell';
+import { PageShell } from '@/modules/shell';
 
 export default function LoginPage() {
   return (

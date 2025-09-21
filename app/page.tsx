@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PageShell } from 'modules/shell';
+import { PageShell } from '@/modules/shell';
 
 export default function HomePage() {
   return (

@@ -32,7 +32,6 @@
   --color-accent3: #22C55E;
   --button-radius: 9999px;
   --card-radius: 1rem;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .dark {
