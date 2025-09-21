@@ -1,5 +1,6 @@
 import CourseCard from '@/components/CourseCard';
 import CourseFilters from '@/components/CourseFilters';
+import { PageShell } from 'modules/shell';
 import { courseCategories, courseLevels, courses } from '@/app/data/courses';
 
 export default function CoursesPage({
@@ -20,25 +21,27 @@ export default function CoursesPage({
   });
 
   return (
-    <section className="space-y-8">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-semibold text-white">Catalogue de méditations</h1>
-        <p className="text-sm text-slate-300">
-          Filtrez par catégorie et par niveau pour trouver la séance adaptée à votre état du moment.
-        </p>
-      </div>
-      <CourseFilters currentCategory={category} currentLevel={level} />
-      {filteredCourses.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredCourses.map((course) => (
-            <CourseCard key={course.slug} course={course} />
-          ))}
+    <PageShell>
+      <section className="space-y-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-semibold text-white">Catalogue de méditations</h1>
+          <p className="text-sm text-slate-300">
+            Filtrez par catégorie et par niveau pour trouver la séance adaptée à votre état du moment.
+          </p>
         </div>
-      ) : (
-        <p className="rounded-xl border border-dashed border-slate-700 bg-slate-900/70 p-6 text-sm text-slate-300">
-          Aucun cours ne correspond à votre recherche pour le moment. Essayez d’autres filtres.
-        </p>
-      )}
-    </section>
+        <CourseFilters currentCategory={category} currentLevel={level} />
+        {filteredCourses.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredCourses.map((course) => (
+              <CourseCard key={course.slug} course={course} />
+            ))}
+          </div>
+        ) : (
+          <p className="rounded-xl border border-dashed border-slate-700 bg-slate-900/70 p-6 text-sm text-slate-300">
+            Aucun cours ne correspond à votre recherche pour le moment. Essayez d’autres filtres.
+          </p>
+        )}
+      </section>
+    </PageShell>
   );
 }
