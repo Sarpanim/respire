@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "db:migrate": "supabase db push",
-    "fn:deploy": "supabase functions deploy stripe-webhook"
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/ssr": "^0.4.0",

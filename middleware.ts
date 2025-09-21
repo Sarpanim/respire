@@ -34,16 +34,9 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const protectedPrefixes = ['/dashboard', '/admin'] as const;
-  const isProtectedRoute = protectedPrefixes.some((path) => {
-    const pathname = request.nextUrl.pathname;
-    return pathname === path || pathname.startsWith(`${path}/`);
-  });
-
-  if (!session && isProtectedRoute) {
+  if (!session && request.nextUrl.pathname.startsWith('/dashboard')) {
     const redirectUrl = new URL('/login', request.url);
-    const redirectPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;
-    redirectUrl.searchParams.set('redirect_to', redirectPath || '/');
+    redirectUrl.searchParams.set('redirect_to', request.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
@@ -51,5 +44,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard', '/dashboard/:path*', '/admin', '/admin/:path*'],
+  matcher: ['/dashboard', '/dashboard/:path*'],
 };
