@@ -12,25 +12,32 @@ type AccessibleProps = {
 
 export type SectionKind = 'hero' | 'featureGrid' | 'card';
 
-export type HeroActionVariant = 'primary' | 'secondary';
+export type SectionTone = 'default' | 'muted' | 'primary';
+export type SectionLayout = 'stack' | 'grid' | 'prose';
+
+export type SectionActionVariant = 'primary' | 'ghost' | 'link';
 
 export type HeroAction = {
   key: string;
   label: string;
   href: string;
-  variant?: HeroActionVariant;
+  variant?: SectionActionVariant;
   className?: string;
   ariaLabel?: string;
 };
 
-export type HeroSection = AccessibleProps & {
+type WithToneAndLayout<T extends AccessibleProps = AccessibleProps> = T & {
+  tone?: SectionTone;
+  layout?: SectionLayout;
+};
+
+export type HeroSection = WithToneAndLayout & {
   kind: 'hero';
   eyebrow?: string;
   title: string;
   titleTag?: 'h1' | 'h2' | 'h3' | 'h4';
   description?: string;
   descriptionClassName?: string;
-  tone?: 'default' | 'surface' | 'plain';
   contentClassName?: string;
   actions?: HeroAction[];
 };
@@ -41,15 +48,14 @@ export type FeatureGridItem = {
   description: string;
 };
 
-export type FeatureGridSection = AccessibleProps & {
+export type FeatureGridSection = WithToneAndLayout & {
   kind: 'featureGrid';
   items: FeatureGridItem[];
   itemClassName?: string;
   itemHeadingLevel?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  tone?: 'default' | 'plain';
 };
 
-export type CardSection = AccessibleProps & {
+export type CardSection = WithToneAndLayout & {
   kind: 'card';
   eyebrow?: string;
   title?: string;
@@ -57,7 +63,6 @@ export type CardSection = AccessibleProps & {
   description?: string;
   content?: ReactNode;
   footer?: ReactNode;
-  tone?: 'default' | 'plain';
   actions?: HeroAction[];
 };
 

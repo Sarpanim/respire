@@ -1,20 +1,25 @@
 import Link from 'next/link';
 import Section from '../Section';
 import { cn } from '@/lib/utils';
-import type { HeroAction, HeroActionVariant, HeroSection } from './types';
+import type { HeroAction, HeroSection, SectionActionVariant, SectionLayout, SectionTone } from './types';
 
-const DEFAULT_SECTION_CLASS = 'mx-auto flex w-full max-w-3xl flex-col items-start';
-
-const ACTION_VARIANT_CLASSNAMES: Record<HeroActionVariant, string> = {
-  primary: 'btn-primary',
-  secondary:
-    'inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+const SECTION_LAYOUT_CLASSNAMES: Record<SectionLayout, string> = {
+  stack: 'mx-auto flex w-full max-w-3xl flex-col items-start',
+  grid: 'mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-2 md:items-center',
+  prose: 'mx-auto w-full max-w-3xl space-y-6',
 };
 
-const TONE_CONTENT_CLASSNAMES: Record<NonNullable<HeroSection['tone']>, string> = {
-  default: 'card w-full space-y-6 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-slate-950',
-  surface: 'card w-full space-y-6',
-  plain: 'w-full space-y-6',
+const ACTION_VARIANT_CLASSNAMES: Record<SectionActionVariant, string> = {
+  primary: 'btn-primary',
+  ghost:
+    'inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+  link: 'inline-flex items-center text-sm font-semibold text-primary underline-offset-4 transition hover:text-primary-dark',
+};
+
+const HERO_TONE_CONTENT_CLASSNAMES: Record<SectionTone, string> = {
+  default: 'card w-full space-y-6',
+  muted: 'w-full space-y-6',
+  primary: 'card w-full space-y-6 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-slate-950',
 };
 
 function renderAction(action: HeroAction) {
@@ -37,25 +42,28 @@ export default function Hero({
   kind: _kind,
   as,
   className,
+  layout = 'stack',
   eyebrow,
   title,
   titleTag = 'h1',
   description,
   descriptionClassName,
-  tone = 'default',
+  tone = 'primary',
   contentClassName,
   actions,
   ...rest
 }: HeroSection) {
   const TitleTag = titleTag;
+  const sectionLayoutClass = SECTION_LAYOUT_CLASSNAMES[layout] ?? SECTION_LAYOUT_CLASSNAMES.stack;
+  const toneClassName = HERO_TONE_CONTENT_CLASSNAMES[tone] ?? HERO_TONE_CONTENT_CLASSNAMES.primary;
 
   return (
     <Section
       {...rest}
       as={as ?? 'section'}
-      className={cn(DEFAULT_SECTION_CLASS, className)}
+      className={cn(sectionLayoutClass, className)}
     >
-      <div className={cn(TONE_CONTENT_CLASSNAMES[tone], contentClassName)}>
+      <div className={cn(toneClassName, contentClassName)}>
         {eyebrow ? (
           <span className="inline-flex rounded-full bg-slate-800/80 px-3 py-1 text-xs uppercase tracking-widest text-slate-300">
             {eyebrow}

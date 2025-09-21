@@ -1,19 +1,26 @@
 import Link from 'next/link';
 import Section from '../Section';
 import { cn } from '@/lib/utils';
-import type { CardSection, HeroAction, HeroActionVariant } from './types';
+import type { CardSection, HeroAction, SectionActionVariant, SectionLayout, SectionTone } from './types';
 
-const DEFAULT_CARD_CLASS = 'card bg-slate-900/60';
-
-const CARD_TONE_CLASSNAMES: Record<NonNullable<CardSection['tone']>, string> = {
-  default: DEFAULT_CARD_CLASS,
-  plain: '',
+const CARD_TONE_CLASSNAMES: Record<SectionTone, string> = {
+  default: 'card bg-slate-900/60',
+  muted: '',
+  primary:
+    'card bg-gradient-to-br from-primary/40 via-primary/20 to-transparent ring-1 ring-primary/40 backdrop-blur',
 };
 
-const ACTION_VARIANT_CLASSNAMES: Record<HeroActionVariant, string> = {
+const CARD_LAYOUT_CLASSNAMES: Record<SectionLayout, string> = {
+  stack: '',
+  grid: 'grid gap-6',
+  prose: 'space-y-4',
+};
+
+const ACTION_VARIANT_CLASSNAMES: Record<SectionActionVariant, string> = {
   primary: 'btn-primary',
-  secondary:
+  ghost:
     'inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+  link: 'inline-flex items-center text-sm font-semibold text-primary underline-offset-4 transition hover:text-primary-dark',
 };
 
 function renderAction(action: HeroAction) {
@@ -36,6 +43,7 @@ export default function Card({
   kind: _kind,
   as,
   className,
+  layout = 'stack',
   eyebrow,
   title,
   titleTag = 'h2',
@@ -69,7 +77,7 @@ export default function Card({
     <Section
       {...rest}
       as={Tag}
-      className={cn(CARD_TONE_CLASSNAMES[tone], className)}
+      className={cn(CARD_TONE_CLASSNAMES[tone], CARD_LAYOUT_CLASSNAMES[layout] ?? CARD_LAYOUT_CLASSNAMES.stack, className)}
     >
       {eyebrow ? (
         <span className="inline-flex rounded-full bg-slate-800/80 px-3 py-1 text-xs uppercase tracking-widest text-slate-300">

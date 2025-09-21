@@ -1,10 +1,9 @@
-import { PageShell } from '@/modules/shell';
+import { PageShell, composeSection } from '@/modules/shell';
 import type { SectionDefinition } from '@/modules/shell';
 
 const sections: SectionDefinition[] = [
-  {
+  composeSection('hero.main', {
     key: 'home-hero',
-    kind: 'hero',
     eyebrow: 'Respire, ici et maintenant',
     title: 'Une application de méditation simple, moderne et pensée pour la concentration.',
     description:
@@ -14,19 +13,17 @@ const sections: SectionDefinition[] = [
         key: 'login-action',
         label: 'Se connecter',
         href: '/login',
-        variant: 'primary',
       },
       {
         key: 'courses-action',
         label: 'Parcourir les cours',
         href: '/courses',
-        variant: 'secondary',
+        variant: 'ghost',
       },
     ],
-  },
-  {
+  }),
+  composeSection('grid.features', {
     key: 'home-feature-grid',
-    kind: 'featureGrid',
     items: [
       {
         key: 'magic-link',
@@ -53,7 +50,7 @@ const sections: SectionDefinition[] = [
           'Propulsé par Vercel et Supabase pour des mises à jour fluides et sécurisées du MVP à la production.',
       },
     ],
-  },
+  }),
 ];
 
 export default function HomePage() {
