@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  /* primary palette */
+  --color-primary-600:#3A8DFF;
+  --color-primary-700:#1B65D4;
+
+  /* typography & radii */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --radius-sm: .375rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;
+}
+[data-theme="dark"]{
+  /* keep same for now (no visual change), but structure ready */
+  --color-primary-600:#3A8DFF;
+  --color-primary-700:#1B65D4;
+}
+
 :root {
   color-scheme: light;
   --color-primary: #3A8DFF;
@@ -15,7 +32,7 @@
   --color-accent3: #22C55E;
   --button-radius: 9999px;
   --card-radius: 1rem;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .dark {
@@ -46,20 +63,21 @@ a:focus-visible {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5 hover:bg-primary-dark hover:text-primary-foreground focus-visible:text-primary-foreground focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 active:text-primary-foreground disabled:text-primary-foreground;
+  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5 hover:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:text-white active:text-white disabled:text-white;
+  background: var(--color-primary-600);
+  color: #fff;
   border-radius: var(--button-radius);
 }
 
-/* keep primary buttons readable */
-.btn-primary {
-  color: var(--color-primaryText);
+/* make shared utilities read tokens (no visual change expected) */
+.btn-primary:hover {
+  background: var(--color-primary-700);
+  color: #fff;
 }
 
-.btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  color: var(--color-primaryText) !important;
-  filter: brightness(0.92);
+  color: #fff !important;
 }
 
 .card {
