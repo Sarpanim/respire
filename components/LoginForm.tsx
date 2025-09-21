@@ -67,7 +67,7 @@ export default function LoginForm() {
       />
       <button
         type="submit"
-        className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition hover:bg-primary-dark hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
+        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Envoi en cours…' : 'Envoyer un lien magique'}
