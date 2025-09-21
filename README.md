@@ -85,6 +85,48 @@ middleware.ts            # Protection /dashboard + refresh session
 - Ajouter des tests end-to-end (Playwright) et un design system.
 - Connecter un stockage Supabase pour héberger les fichiers audio.
 
+## 💳 Billing & Admin
+
+Une base de données orientée facturation est disponible pour préparer l’espace d’administration sans impacter l’interface :
+
+- Migration SQL : `supabase/migrations/20240601090000_billing_admin.sql` crée les tables `profiles`, `plans`, `subscriptions`, `app_settings` et `audit_logs`, ainsi que les fonctions `is_admin` et `get_active_subscription`.
+- RLS : chaque table est protégée (lecture propriétaire, rôles admin via `is_admin()`, service role pour les automatisations).
+- Seed : deux plans factices (mensuel et annuel) sont insérés de manière idempotente.
+
+### Variables d’environnement supplémentaires
+
+Pour l’Edge Function Stripe, configurez les secrets suivants côté Supabase :
+
+```
+STRIPE_API_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+SUPABASE_URL=https://<project>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+```
+
+Dans l’application Next.js, exposez la cible du webhook si besoin :
+
+```
+NEXT_PUBLIC_SUPABASE_FUNCTION_URL=https://<project>.functions.supabase.co/stripe-webhook
+```
+
+### Commandes utiles
+
+- Appliquer la migration : `npm run db:migrate` (alias de `supabase db push`).
+- Déployer l’Edge Function : `npm run fn:deploy` (alias de `supabase functions deploy stripe-webhook`).
+
+Le webhook Stripe est servi via Supabase (`supabase/functions/stripe-webhook`). La route Next.js `/api/stripe/webhook` répond `410 Gone` et documente l’URL cible pour les intégrations externes.
+
+### Promouvoir un administrateur
+
+Une fois un utilisateur créé, connectez-vous à Supabase (SQL Editor) et exécutez :
+
+```sql
+update public.profiles set role = 'admin' where user_id = '<uuid>'; 
+```
+
+Les administrateurs disposent d’un accès lecture/écriture sur les nouvelles tables et pourront consommer les helpers `lib/billing.ts` (`getUserSubscription`, `requireActiveSub`).
+
 ## ✅ Définition de Done du MVP
 
 - Pages `/`, `/login`, `/dashboard`, `/courses`, `/courses/[slug]` disponibles.
