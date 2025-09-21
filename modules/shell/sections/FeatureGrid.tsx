@@ -12,6 +12,7 @@ export default function FeatureGrid({
   items,
   itemClassName,
   itemHeadingLevel = 'h2',
+  tone = 'default',
   ...rest
 }: FeatureGridSection) {
   return (
@@ -24,7 +25,8 @@ export default function FeatureGrid({
         <Card
           key={item.key}
           kind="card"
-          headingLevel={itemHeadingLevel}
+          titleTag={itemHeadingLevel}
+          tone={tone === 'plain' ? 'plain' : 'default'}
           className={itemClassName}
           title={item.title}
           description={item.description}

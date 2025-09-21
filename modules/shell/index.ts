@@ -11,5 +11,6 @@ export type {
   FeatureGridSection,
   CardSection,
   HeroAction,
+  HeroActionVariant,
   FeatureGridItem,
 } from './sections/types';

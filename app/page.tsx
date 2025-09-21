@@ -14,14 +14,13 @@ const sections: SectionDefinition[] = [
         key: 'login-action',
         label: 'Se connecter',
         href: '/login',
-        className: 'btn-primary',
+        variant: 'primary',
       },
       {
         key: 'courses-action',
         label: 'Parcourir les cours',
         href: '/courses',
-        className:
-          'rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+        variant: 'secondary',
       },
     ],
   },
