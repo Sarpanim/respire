@@ -1,32 +1,25 @@
-// app/(auth)/auth/callback/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase-server'
 
-const SAFE_PATHS = new Set(['/dashboard', '/']) // cibles de redirect autorisées
-
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url)
-  const code = url.searchParams.get('code')
-  const redirectTo = url.searchParams.get('redirect_to') ?? '/dashboard'
-  const target = SAFE_PATHS.has(redirectTo) ? redirectTo : '/dashboard'
+export async function GET(request: NextRequest) {
+  const requestUrl = new URL(request.url)
+  const code = requestUrl.searchParams.get('code')
+  const rawRedirect = requestUrl.searchParams.get('redirect_to') ?? '/dashboard'
+  const redirectPath =
+    rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/dashboard'
 
   if (!code) {
-    return NextResponse.redirect(new URL('/login?error=missing_code', url.origin), {
-      headers: { 'cache-control': 'no-store' }
-    })
+    return NextResponse.redirect(new URL('/login?error=missing_code', requestUrl.origin))
   }
 
-  const supabase = createClient()
-  const { error } = await supabase.auth.exchangeCodeForSession(code)
-
-  if (error) {
-    return NextResponse.redirect(new URL('/login?error=auth', url.origin), {
-      headers: { 'cache-control': 'no-store' }
-    })
+  try {
+    const supabase = createClient()
+    await supabase.auth.exchangeCodeForSession(code)
+  } catch (error) {
+    console.error('Erreur lors de la récupération de session Supabase', error)
+    return NextResponse.redirect(new URL('/login?error=auth', requestUrl.origin))
   }
 
-  // important: pas de cache et on renvoie avec cookies déjà écrits par @supabase/ssr
-  return NextResponse.redirect(new URL(target, url.origin), {
-    headers: { 'cache-control': 'no-store' }
-  })
+  return NextResponse.redirect(new URL(redirectPath, requestUrl.origin))
 }

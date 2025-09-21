@@ -1,45 +1,55 @@
-// middleware.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@supabase/ssr'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next({ request: { headers: req.headers } })
-
-  // laisser passer le callback d’auth
-  if (req.nextUrl.pathname.startsWith('/auth/callback')) return res
-
-  // client SSR lié à cette réponse (propagera set-cookie)
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get: (name) => req.cookies.get(name)?.value,
-        set: (name, value, options) => {
-          res.cookies.set({ name, value, ...options })
-        },
-        remove: (name, options) => {
-          res.cookies.set({ name, value: '', ...options, maxAge: 0 })
-        },
-      },
-    }
-  )
-
-  // protège le dashboard
-  if (req.nextUrl.pathname.startsWith('/dashboard')) {
-    const { data: { session } } = await supabase.auth.getSession()
-    if (!session) {
-      const redirect = new URL('/login', req.url)
-      redirect.searchParams.set('redirect_to', '/dashboard')
-      return NextResponse.redirect(redirect)
-    }
+export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/auth/callback')) {
+    return NextResponse.next()
   }
 
-  return res
+  const response = NextResponse.next({
+    request: { headers: new Headers(request.headers) },
+  })
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+    cookies: {
+      get(name: string) {
+        return request.cookies.get(name)?.value
+      },
+      set(name: string, value: string, options: CookieOptions) {
+        response.cookies.set({ name, value, ...options })
+      },
+      remove(name: string, options: CookieOptions) {
+        response.cookies.set({ name, value: '', ...options, maxAge: 0 })
+      },
+    },
+  })
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  const url = request.nextUrl
+  const isLogin = url.pathname === '/login'
+  const isDashboard = url.pathname.startsWith('/dashboard')
+  const isAdmin = url.pathname.startsWith('/admin')
+
+  if (session && isLogin) {
+    const dest = new URL('/dashboard', url.origin)
+    return NextResponse.redirect(dest)
+  }
+
+  if (!session && (isDashboard || isAdmin)) {
+    const dest = new URL('/login', url.origin)
+    dest.searchParams.set('redirect_to', url.pathname + url.search)
+    return NextResponse.redirect(dest)
+  }
+
+  return response
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api/stripe/webhook).*)',
-  ],
+  matcher: ['/dashboard/:path*', '/admin/:path*', '/login', '/auth/callback'],
 }
