@@ -1,13 +1,14 @@
 import React from 'react';
-import Section, { type SectionProps } from './Section';
+import type { ReactNode } from 'react';
+import { renderSections, type RenderableSection } from './renderSections';
 
 export type PageShellProps = {
   title?: string;
   description?: string;
   /** Declares the page's sections in order; each entry describes a slot/block. */
-  sections?: Array<SectionProps & { key: string }>;
+  sections?: RenderableSection[];
   /** Fallback children if no sections provided. */
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 /**
@@ -22,11 +23,7 @@ export default function PageShell({ title, description, sections, children }: Pa
       <div className="sr-only">
         {title} {description}
       </div>
-      <div>
-        {sections && sections.length
-          ? sections.map(({ key, ...s }) => <Section key={key} {...s} />)
-          : children}
-      </div>
+      <div>{sections && sections.length ? renderSections(sections) : children}</div>
     </>
   );
 }
