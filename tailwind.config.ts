@@ -5,9 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        ring: 'var(--ring)',
         primary: {
-          DEFAULT: 'var(--color-primary-600)',
-          dark: 'var(--color-primary-700)',
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
         },
       },
       fontFamily: {
