@@ -5,7 +5,9 @@ import { createClient } from '@/lib/supabase-server';
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
-  const redirectPath = requestUrl.searchParams.get('redirect_to') ?? '/dashboard';
+  const rawRedirect = requestUrl.searchParams.get('redirect_to') ?? '/dashboard';
+  const redirectPath =
+    rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/dashboard';
 
   if (!code) {
     return NextResponse.redirect(new URL('/login?error=missing_code', requestUrl.origin));
