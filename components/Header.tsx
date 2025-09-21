@@ -45,10 +45,7 @@ export default function Header({ session }: { session: Session | null }) {
               </button>
             </form>
           ) : (
-            <Link
-              href="/login"
-              className="btn-primary"
-            >
+            <Link href="/login" className="btn-primary">
               Se connecter
             </Link>
           )}
