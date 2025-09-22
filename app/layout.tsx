@@ -20,14 +20,19 @@ export default async function RootLayout({
   const cssVarStyle = buildCssVariables(activeTheme.tokens) as CSSProperties;
   let session: Session | null = null;
 
-  try {
-    const supabase = createClient();
-    const {
-      data: { session: currentSession },
-    } = await supabase.auth.getSession();
-    session = currentSession;
-  } catch (error) {
-    session = null;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseAnonKey) {
+    try {
+      const supabase = createClient();
+      const {
+        data: { session: currentSession },
+      } = await supabase.auth.getSession();
+      session = currentSession;
+    } catch (error) {
+      session = null;
+    }
   }
 
   return (

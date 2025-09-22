@@ -108,6 +108,13 @@ function toThemeRecord(data: any): ThemeRecord | null {
 }
 
 export async function fetchActiveTheme(): Promise<ThemeRecord> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return { id: 'default', name: 'Default', tokens: DEFAULT_THEME_TOKENS }
+  }
+
   try {
     const supabase = createClient({ serviceRole: true })
     const { data, error } = await supabase.rpc('get_active_theme')
