@@ -1,0 +1,96 @@
+name: Merge main into PR branch (prioritise main)
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_branch:
+        description: 'Branch name to merge main into (ex: codex/create-simple-meditation-app-using-no-code-approach-ucy7gm)'
+        required: true
+        default: 'codex/create-simple-meditation-app-using-no-code-approach-ucy7gm'
+      run_build:
+        description: 'Run npm install & build after merge'
+        required: true
+        default: 'true'
+
+permissions:
+  contents: write
+
+jobs:
+  merge-and-build:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: '18'
+    steps:
+      - name: Checkout repo (fetch all)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch main
+        run: |
+          git fetch origin main
+
+      - name: Checkout PR branch
+        run: |
+          git checkout -B "${{ github.event.inputs.pr_branch }}" "origin/${{ github.event.inputs.pr_branch }}"
+
+      - name: Merge origin/main into PR branch
+        id: merge
+        run: |
+          set -e
+          if git merge origin/main --no-edit; then
+            echo "Merge succeeded without conflicts"
+            echo "::set-output name=merged::true"
+          else
+            echo "Merge had conflicts - resolving by preferring main (theirs)"
+            for f in $(git diff --name-only --diff-filter=U); do
+              git checkout --theirs -- "$f"
+              git add "$f"
+            done
+            git commit -m "Resolve merge conflicts by prioritizing main (automated)"
+            echo "::set-output name=merged::true"
+          fi
+
+      - name: Optionally run install & build
+        if: ${{ github.event.inputs.run_build == 'true' }}
+        run: |
+          npm ci --prefer-offline --no-audit --progress=false
+          npm run build || (echo "Build failed" && exit 1)
+
+      - name: Push resolved branch
+        run: |
+          git push origin "${{ github.event.inputs.pr_branch }}"
+
+      - name: Create comment on PR (if exists)
+        if: ${{ steps.merge.outputs.merged == 'true' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = "${{ github.event.inputs.pr_branch }}";
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${branch}`,
+              state: "open"
+            });
+            if (prs.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prs[0].number,
+                body: `Automated merge: origin/main was merged into \`${branch}\` with conflicts resolved (prioritizing main). Build step: ${{ github.event.inputs.run_build }}.`
+              });
+            } else {
+              console.log("No open PR found for branch", branch);
+            }
