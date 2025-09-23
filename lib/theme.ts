@@ -1,28 +1,47 @@
+'use client';
+
+import { createContext, useContext, useEffect, useState } from 'react';
+
 export type Theme = 'light' | 'dark';
 
-const DATA_ATTR = 'theme';
+type ThemeContextType = {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
 
-export function getTheme(): Theme {
-  if (typeof document === 'undefined') {
-    return 'light';
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
-
-  const value = document.documentElement.dataset[DATA_ATTR];
-  return value === 'dark' ? 'dark' : 'light';
+  return context;
 }
 
-export function setTheme(theme: Theme) {
-  if (typeof document === 'undefined') {
-    return;
-  }
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>('light');
 
-  document.documentElement.dataset[DATA_ATTR] = theme;
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme') as Theme | null;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+    }
+  }, []);
 
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(newTheme);
+  };
 
-  // TODO: Persist the chosen theme once a public switcher is introduced.
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
