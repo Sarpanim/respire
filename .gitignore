@@ -18,3 +18,9 @@ yarn-error.log*
 # Env files
 .env*
 .supabase
+
+# Lockfiles
+package-lock.json
+
+# Logs
+npm_dev.log
