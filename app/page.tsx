@@ -3,14 +3,14 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     <section className="mx-auto flex max-w-3xl flex-col items-start gap-12">
-      <div className="card w-full space-y-6 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-slate-950">
-        <span className="inline-flex rounded-full bg-slate-800/80 px-3 py-1 text-xs uppercase tracking-widest text-slate-300">
+      <div className="card w-full space-y-6 bg-gradient-to-br from-card/90 via-card/80 to-background">
+        <span className="inline-flex rounded-full bg-accent/80 px-3 py-1 text-xs uppercase tracking-widest text-muted-foreground">
           Respire, ici et maintenant
         </span>
-        <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+        <h1 className="text-3xl font-semibold text-foreground sm:text-4xl">
           Une application de méditation simple, moderne et pensée pour la concentration.
         </h1>
-        <p className="text-base leading-relaxed text-slate-300">
+        <p className="text-base leading-relaxed text-muted-foreground">
           Explorez un catalogue de séances guidées, reprenez votre écoute là où vous vous êtes arrêté et avancez à votre
           rythme. Respire offre une expérience mobile-first, sécurisée et connectée à Supabase pour une authentification sans
           friction.
@@ -21,7 +21,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/courses"
-            className="rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white"
+            className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground/80 transition hover:border-accent hover:text-foreground"
           >
             Parcourir les cours
           </Link>
@@ -50,9 +50,9 @@ export default function HomePage() {
               'Propulsé par Vercel et Supabase pour des mises à jour fluides et sécurisées du MVP à la production.',
           },
         ].map((feature) => (
-          <article key={feature.title} className="card bg-slate-900/60">
-            <h2 className="text-lg font-semibold text-white">{feature.title}</h2>
-            <p className="mt-2 text-sm text-slate-300">{feature.description}</p>
+          <article key={feature.title} className="card bg-card/60">
+            <h2 className="text-lg font-semibold text-foreground">{feature.title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
           </article>
         ))}
       </div>

@@ -40,7 +40,7 @@ export default function AudioPlayer({ slug, src }: { slug: string; src: string }
       controls
       preload="metadata"
       aria-label="Lecteur audio du cours"
-      className="w-full rounded-xl border border-slate-700 bg-slate-900 p-3"
+      className="w-full rounded-xl border border-border bg-card p-3"
     >
       <source src={src} type="audio/mpeg" />
       Votre navigateur ne supporte pas la lecture audio.

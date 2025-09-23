@@ -51,7 +51,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      <label className="block text-sm font-medium text-slate-200" htmlFor="email">
+      <label className="block text-sm font-medium text-foreground/80" htmlFor="email">
         Adresse e-mail
       </label>
       <input
@@ -63,11 +63,11 @@ export default function LoginForm() {
         placeholder="vous@example.com"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
+        className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
       />
       <button
         type="submit"
-        className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-70"
+        className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-70"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Envoi en cours…' : 'Envoyer un lien magique'}
@@ -77,7 +77,11 @@ export default function LoginForm() {
           role="status"
           aria-live="polite"
           className={
-            variant === 'success' ? 'text-sm text-emerald-400' : variant === 'error' ? 'text-sm text-rose-400' : 'text-sm text-slate-400'
+            variant === 'success'
+              ? 'text-sm text-emerald-400'
+              : variant === 'error'
+                ? 'text-sm text-rose-400'
+                : 'text-sm text-muted-foreground'
           }
         >
           {message}

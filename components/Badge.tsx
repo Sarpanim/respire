@@ -14,7 +14,7 @@ export default function Badge({
         'inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide',
         variant === 'default'
           ? 'bg-primary/20 text-primary'
-          : 'border border-slate-700 text-slate-300'
+          : 'border border-border text-muted-foreground'
       )}
     >
       {children}

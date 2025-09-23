@@ -3,11 +3,27 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: var(--color-scheme, dark);
+  --color-scheme: dark;
+  --color-background: 2 6 23;
+  --color-background-muted: 15 23 42;
+  --color-card: 15 23 42;
+  --color-card-foreground: 226 232 240;
+  --color-muted: 31 41 55;
+  --color-muted-foreground: 148 163 184;
+  --color-accent: 31 41 55;
+  --color-accent-foreground: 248 250 252;
+  --color-border: 30 41 59;
+  --color-input: 15 23 42;
+  --color-ring: 58 141 255;
+  --color-foreground: 248 250 252;
+  --color-primary: 58 141 255;
+  --color-primary-dark: 27 101 212;
+  --color-primary-foreground: 255 255 255;
 }
 
 body {
-  @apply bg-slate-950 text-slate-50 antialiased;
+  @apply min-h-screen bg-background text-foreground antialiased;
 }
 
 a {
@@ -16,13 +32,13 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-slate-950;
+  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+  @apply inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:ring-2 focus-visible:ring-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
 
 .card {
-  @apply rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg backdrop-blur;
+  @apply rounded-2xl border border-border bg-card/70 p-6 shadow-lg backdrop-blur;
 }

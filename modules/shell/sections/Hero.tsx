@@ -12,14 +12,14 @@ const SECTION_LAYOUT_CLASSNAMES: Record<SectionLayout, string> = {
 const ACTION_VARIANT_CLASSNAMES: Record<SectionActionVariant, string> = {
   primary: 'btn-primary',
   ghost:
-    'inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+    'inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground/80 transition hover:border-accent hover:text-foreground',
   link: 'inline-flex items-center text-sm font-semibold text-primary underline-offset-4 transition hover:text-primary-dark',
 };
 
 const HERO_TONE_CONTENT_CLASSNAMES: Record<SectionTone, string> = {
   default: 'card w-full space-y-6',
   muted: 'w-full space-y-6',
-  primary: 'card w-full space-y-6 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-slate-950',
+  primary: 'card w-full space-y-6 bg-gradient-to-br from-card/90 via-card/80 to-background',
 };
 
 function renderAction(action: HeroAction) {
@@ -65,13 +65,13 @@ export default function Hero({
     >
       <div className={cn(toneClassName, contentClassName)}>
         {eyebrow ? (
-          <span className="inline-flex rounded-full bg-slate-800/80 px-3 py-1 text-xs uppercase tracking-widest text-slate-300">
+          <span className="inline-flex rounded-full bg-accent/80 px-3 py-1 text-xs uppercase tracking-widest text-muted-foreground">
             {eyebrow}
           </span>
         ) : null}
-        <TitleTag className="text-3xl font-semibold text-white sm:text-4xl">{title}</TitleTag>
+        <TitleTag className="text-3xl font-semibold text-foreground sm:text-4xl">{title}</TitleTag>
         {description ? (
-          <p className={cn('text-base leading-relaxed text-slate-300', descriptionClassName)}>{description}</p>
+          <p className={cn('text-base leading-relaxed text-muted-foreground', descriptionClassName)}>{description}</p>
         ) : null}
         {actions && actions.length ? (
           <div className="flex flex-wrap gap-3">{actions.map(renderAction)}</div>
