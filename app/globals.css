@@ -4,10 +4,15 @@
 
 :root {
   color-scheme: light;
+  --color-background: #020617;
+  --color-foreground: #f8fafc;
+  --color-primary: #3A8DFF;
+  --color-primary-dark: #1B65D4;
+  --color-primary-foreground: #ffffff;
 }
 
 body {
-  @apply bg-slate-950 text-slate-50 antialiased;
+  @apply text-foreground antialiased;
 }
 
 a {
