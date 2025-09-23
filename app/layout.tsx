@@ -1,6 +1,10 @@
+import type { CSSProperties, ReactNode } from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
+import ThemeProvider from '@/components/ThemeProvider';
+import { fetchActiveThemeTokens } from '@/lib/supabase-theme';
+import { themeTokensToCssVariables } from '@/lib/theme-tokens';
 import { createClient } from '@/lib/supabase-server';
 import type { Session } from '@supabase/supabase-js';
 
@@ -12,9 +16,11 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   let session: Session | null = null;
+  const themeTokens = await fetchActiveThemeTokens();
+  const htmlStyle = themeTokensToCssVariables(themeTokens) as CSSProperties;
 
   try {
     const supabase = createClient();
@@ -27,10 +33,12 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="fr">
+    <html lang="fr" style={htmlStyle}>
       <body className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900">
-        <Header session={session} />
-        <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:pt-12">{children}</main>
+        <ThemeProvider initialTokens={themeTokens}>
+          <Header session={session} />
+          <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:pt-12">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -9,9 +9,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#3A8DFF',
-          dark: '#1B65D4',
+          DEFAULT: 'var(--color-primary)',
+          foreground: 'var(--color-primary-foreground)',
+          dark: 'var(--color-primary-dark)',
         },
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
       },
     },
   },
