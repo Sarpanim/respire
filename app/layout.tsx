@@ -3,7 +3,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import { createClient } from '@/lib/supabase-server';
 import type { Session } from '@supabase/supabase-js';
-import { ThemeProvider } from '@/lib/theme.tsx';
+import { ThemeProvider } from '@/lib/theme';
 
 export const metadata: Metadata = {
   title: 'Respire – Méditation guidée',
