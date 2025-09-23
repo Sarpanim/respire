@@ -20,6 +20,20 @@
   --color-primary: 58 141 255;
   --color-primary-dark: 27 101 212;
   --color-primary-foreground: 255 255 255;
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  --space-3: 0.75rem;
+  --space-6: 1.5rem;
+  --btn-primary-padding-y: var(--space-3);
+  --btn-primary-padding-x: var(--space-6);
+  --btn-primary-translate-y: -0.125rem;
+  --btn-primary-shadow: 0 4px 6px -1px rgb(var(--color-primary) / 0.35),
+    0 2px 4px -2px rgb(var(--color-primary) / 0.2);
+  --btn-primary-shadow-hover: 0 10px 25px -10px rgb(var(--color-primary) / 0.45),
+    0 8px 16px -12px rgb(var(--color-primary) / 0.35);
+  --card-padding: var(--space-6);
+  --card-shadow: 0 18px 50px -15px rgb(var(--color-background) / 0.5);
+  --card-backdrop-blur: 20px;
 }
 
 body {
@@ -35,10 +49,54 @@ a:focus-visible {
   @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:ring-2 focus-visible:ring-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-}
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    padding: var(--btn-primary-padding-y) var(--btn-primary-padding-x);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: rgb(var(--color-primary-foreground) / 1);
+    background-color: rgb(var(--color-primary) / 1);
+    box-shadow: var(--btn-primary-shadow);
+    transition:
+      transform 150ms ease,
+      background-color 150ms ease,
+      box-shadow 200ms ease,
+      color 150ms ease;
+    text-decoration: none;
+  }
 
-.card {
-  @apply rounded-2xl border border-border bg-card/70 p-6 shadow-lg backdrop-blur;
+  .btn-primary:hover {
+    transform: translateY(var(--btn-primary-translate-y));
+    background-color: rgb(var(--color-primary-dark) / 1);
+    box-shadow: var(--btn-primary-shadow-hover);
+  }
+
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(var(--color-primary-foreground) / 0.9),
+      0 0 0 4px rgb(var(--color-background) / 1);
+  }
+
+  .btn-primary:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: var(--btn-primary-shadow);
+  }
+
+  .card {
+    border-radius: var(--radius-card);
+    border: 1px solid rgb(var(--color-border) / 1);
+    background-color: rgb(var(--color-card) / 0.7);
+    padding: var(--card-padding);
+    box-shadow: var(--card-shadow);
+    color: inherit;
+    backdrop-filter: blur(var(--card-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  }
 }
