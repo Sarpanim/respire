@@ -1,6 +1,15 @@
 import type { Config } from 'tailwindcss';
 
-import { createTailwindColorConfig } from './lib/theme-tokens';
+import {
+  createTailwindColorConfig,
+  createTailwindFontFamilyConfig,
+  createTailwindFontSizeConfig,
+  createTailwindFontWeightConfig,
+  createTailwindLineHeightConfig,
+  createTailwindRadiusConfig,
+  createTailwindShadowConfig,
+  createTailwindSpacingConfig,
+} from './lib/theme-tokens';
 
 const config: Config = {
   content: [
@@ -12,6 +21,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: createTailwindColorConfig(),
+      borderRadius: createTailwindRadiusConfig(),
+      spacing: createTailwindSpacingConfig(),
+      boxShadow: createTailwindShadowConfig(),
+      fontFamily: createTailwindFontFamilyConfig(),
+      fontSize: createTailwindFontSizeConfig(),
+      lineHeight: createTailwindLineHeightConfig(),
+      fontWeight: createTailwindFontWeightConfig(),
     },
   },
   plugins: [],

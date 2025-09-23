@@ -50,7 +50,15 @@ export default function ThemeProvider({
   initialTokens?: ThemeTokens;
   children: ReactNode;
 }) {
-  const [tokens, setTokens] = useState<ThemeTokens>(() => normalizeThemeTokens(initialTokens));
+  const normalizedInitialTokens = useMemo(
+    () => normalizeThemeTokens(initialTokens),
+    [initialTokens]
+  );
+  const [tokens, setTokens] = useState<ThemeTokens>(normalizedInitialTokens);
+
+  useEffect(() => {
+    setTokens(normalizedInitialTokens);
+  }, [normalizedInitialTokens]);
 
   useEffect(() => {
     applyTokensToDocument(tokens);

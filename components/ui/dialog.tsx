@@ -72,7 +72,7 @@ export function DialogContent({ className, children }: { className?: string; chi
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-section-x">
       <button
         type="button"
         aria-label="Fermer la fenêtre"
@@ -83,7 +83,7 @@ export function DialogContent({ className, children }: { className?: string; chi
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative z-50 w-full max-w-3xl rounded-[var(--radius-card)] border border-border bg-card text-card-foreground p-6 shadow-2xl',
+          'relative z-50 w-full max-w-3xl rounded-card border border-border bg-card/90 p-card text-card-foreground shadow-card',
           className
         )}
         onClick={(event) => event.stopPropagation()}
@@ -96,7 +96,7 @@ export function DialogContent({ className, children }: { className?: string; chi
 }
 
 export function DialogHeader({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cn('space-y-2 text-left', className)}>{children}</div>;
+  return <div className={cn('space-y-sm text-left', className)}>{children}</div>;
 }
 
 export function DialogTitle({ className, children }: { className?: string; children: ReactNode }) {
@@ -108,5 +108,5 @@ export function DialogDescription({ className, children }: { className?: string;
 }
 
 export function DialogFooter({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cn('mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}>{children}</div>;
+  return <div className={cn('mt-lg flex flex-col-reverse gap-sm sm:flex-row sm:justify-end', className)}>{children}</div>;
 }

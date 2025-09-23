@@ -4,41 +4,11 @@
 
 @layer base {
   :root {
-    color-scheme: var(--color-scheme, dark);
-    --color-scheme: dark;
-    --color-background: 2 6 23;
-    --color-background-muted: 15 23 42;
-    --color-card: 15 23 42;
-    --color-card-foreground: 226 232 240;
-    --color-foreground: 248 250 252;
-    --color-primary: 58 141 255;
-    --color-primary-dark: 27 101 212;
-    --color-primary-foreground: 255 255 255;
-    --color-muted: 31 41 55;
-    --color-muted-foreground: 148 163 184;
-    --color-accent: 31 41 55;
-    --color-accent-foreground: 248 250 252;
-    --color-border: 30 41 59;
-    --color-input: 15 23 42;
-    --color-ring: 58 141 255;
-    --radius-card: 1rem;
-    --radius-pill: 9999px;
-    --space-3: 0.75rem;
-    --space-6: 1.5rem;
-    --btn-primary-padding-y: var(--space-3);
-    --btn-primary-padding-x: var(--space-6);
-    --btn-primary-translate-y: -0.125rem;
-    --btn-primary-shadow: 0 4px 6px -1px rgb(var(--color-primary) / 0.35),
-      0 2px 4px -2px rgb(var(--color-primary) / 0.2);
-    --btn-primary-shadow-hover: 0 10px 25px -10px rgb(var(--color-primary) / 0.45),
-      0 8px 16px -12px rgb(var(--color-primary) / 0.35);
-    --card-padding: var(--space-6);
-    --card-shadow: 0 18px 50px -15px rgb(var(--color-background) / 0.5);
-    --card-backdrop-blur: 20px;
+    color-scheme: var(--color-scheme, light);
   }
 
   body {
-    @apply min-h-screen bg-background text-foreground antialiased;
+    @apply min-h-screen bg-background text-foreground antialiased font-sans;
   }
 
   a {
@@ -53,45 +23,21 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center bg-primary text-primary-foreground;
-    border-radius: var(--radius-pill);
-    padding: var(--btn-primary-padding-y) var(--btn-primary-padding-x);
-    font-size: 0.875rem;
-    font-weight: 600;
-    line-height: 1.25rem;
-    box-shadow: var(--btn-primary-shadow);
-    transition:
-      transform 150ms ease,
-      background-color 150ms ease,
-      box-shadow 200ms ease,
-      color 150ms ease;
+    @apply inline-flex transform items-center justify-center gap-control-gap rounded-pill bg-primary px-control-x py-control-y text-button font-semibold leading-button text-primary-foreground shadow-button transition-colors transition-transform duration-150 ease-out focus-visible:shadow-focus focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60;
     text-decoration: none;
   }
 
   .btn-primary:hover {
-    transform: translateY(var(--btn-primary-translate-y));
-    @apply bg-primary-dark;
-    box-shadow: var(--btn-primary-shadow-hover);
-  }
-
-  .btn-primary:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px rgb(var(--color-primary-foreground) / 0.9),
-      0 0 0 4px rgb(var(--color-background) / 1);
+    @apply -translate-y-button-raise bg-primary-dark shadow-button-hover;
   }
 
   .btn-primary:disabled {
-    @apply cursor-not-allowed opacity-60;
-    transform: none;
-    box-shadow: var(--btn-primary-shadow);
+    @apply translate-y-0 shadow-button;
   }
 
   .card {
-    @apply border border-border bg-card/70 text-card-foreground;
-    border-radius: var(--radius-card);
-    padding: var(--card-padding);
-    box-shadow: var(--card-shadow);
-    backdrop-filter: blur(var(--card-backdrop-blur));
-    -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+    @apply rounded-card border border-border bg-card/80 p-card text-card-foreground shadow-card;
+    backdrop-filter: blur(var(--blur-card, 20px));
+    -webkit-backdrop-filter: blur(var(--blur-card, 20px));
   }
 }

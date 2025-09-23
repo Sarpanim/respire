@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 export const Table = forwardRef<HTMLTableElement, TableHTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
-    <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
+    <table ref={ref} className={cn('w-full caption-bottom text-sm leading-snug', className)} {...props} />
   )
 );
 Table.displayName = 'Table';
@@ -47,7 +47,10 @@ export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLT
   ({ className, ...props }, ref) => (
     <th
       ref={ref}
-      className={cn('h-11 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wide text-muted-foreground', className)}
+      className={cn(
+        'h-control-lg px-control-x py-sm text-left align-middle text-xs font-semibold uppercase tracking-wide text-muted-foreground',
+        className
+      )}
       {...props}
     />
   )
@@ -56,14 +59,14 @@ TableHead.displayName = 'TableHead';
 
 export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLTableCellElement>>(
   ({ className, ...props }, ref) => (
-    <td ref={ref} className={cn('px-4 py-4 align-middle text-sm text-foreground', className)} {...props} />
+    <td ref={ref} className={cn('px-control-x py-md align-middle text-sm text-foreground', className)} {...props} />
   )
 );
 TableCell.displayName = 'TableCell';
 
 export const TableCaption = forwardRef<HTMLTableCaptionElement, HTMLAttributes<HTMLTableCaptionElement>>(
   ({ className, ...props }, ref) => (
-    <caption ref={ref} className={cn('mt-4 text-sm text-muted-foreground', className)} {...props} />
+    <caption ref={ref} className={cn('mt-lg text-sm text-muted-foreground', className)} {...props} />
   )
 );
 TableCaption.displayName = 'TableCaption';

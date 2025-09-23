@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ className, type = 'tex
       ref={ref}
       type={type}
       className={cn(
-        'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50',
+        'flex h-control w-full rounded-lg border border-input bg-background px-control-x py-control-y text-sm leading-snug text-foreground shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-focus placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-60',
         className
       )}
       {...props}

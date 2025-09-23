@@ -12,20 +12,21 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50';
+  'inline-flex transform items-center justify-center gap-control-gap rounded-lg text-sm font-medium leading-snug transition-colors transition-transform duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-focus disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60';
 
 const variantClasses: Record<ButtonVariant, string> = {
-  default: 'bg-primary text-primary-foreground shadow hover:bg-primary-dark',
-  secondary: 'bg-muted text-muted-foreground shadow-sm hover:bg-muted/80',
-  outline: 'border border-border bg-background hover:bg-accent hover:text-accent-foreground',
-  ghost: 'hover:bg-accent hover:text-accent-foreground',
+  default:
+    'bg-primary text-primary-foreground shadow-button hover:-translate-y-button-raise hover:bg-primary-dark hover:shadow-button-hover',
+  secondary: 'bg-muted/80 text-muted-foreground shadow-sm hover:bg-muted',
+  outline: 'border border-border bg-background hover:bg-accent/30 hover:text-accent-foreground',
+  ghost: 'hover:bg-accent/20 hover:text-accent-foreground',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  default: 'h-10 px-4 py-2',
-  sm: 'h-9 rounded-md px-3',
-  lg: 'h-11 rounded-md px-8',
-  icon: 'h-10 w-10',
+  default: 'h-control px-control-x py-control-y',
+  sm: 'h-control-sm rounded-md px-control-sm-x py-control-sm-y text-xs',
+  lg: 'h-control-lg px-control-lg-x py-control-lg-y text-base',
+  icon: 'h-control-icon w-control-icon',
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
