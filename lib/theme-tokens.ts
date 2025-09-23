@@ -73,22 +73,11 @@ function hexToRgbChannels(value: string): string | null {
     16
   );
 
-  const alphaSliceStart = hex.length === 4 ? 3 : 6;
-  const alphaSliceEnd = hex.length === 4 ? 4 : 8;
-  let alpha: string | undefined;
-
-  if (hex.length === 4 || hex.length === 8) {
-    const value = parseInt(expand(hex.slice(alphaSliceStart, alphaSliceEnd)), 16) / 255;
-
-    if (!Number.isNaN(value)) {
-      const rounded = Math.round(value * 1000) / 1000;
-      alpha = rounded.toString();
-    }
+  if ([red, green, blue].some((channel) => Number.isNaN(channel))) {
+    return null;
   }
 
-  const channels = `${red} ${green} ${blue}`;
-
-  return alpha ? `${channels} / ${alpha}` : channels;
+  return `${red} ${green} ${blue}`;
 }
 
 function parseRgbFunction(value: string): string | null {
@@ -98,7 +87,7 @@ function parseRgbFunction(value: string): string | null {
     return null;
   }
 
-  const [channelsPart, alphaPart] = match[1]
+  const [channelsPart] = match[1]
     .replace(/,/g, ' ')
     .split('/')
     .map((segment) => segment.trim());
@@ -123,7 +112,7 @@ function parseRgbFunction(value: string): string | null {
 
   const channels = `${Math.round(red)} ${Math.round(green)} ${Math.round(blue)}`;
 
-  return alphaPart && alphaPart.length > 0 ? `${channels} / ${alphaPart}` : channels;
+  return channels;
 }
 
 function formatColorValue(value: string): string {
@@ -146,7 +135,8 @@ function formatColorValue(value: string): string {
   }
 
   if (/^\d+(\.\d+)?\s+\d+(\.\d+)?\s+\d+(\.\d+)?(\s*\/\s*.+)?$/.test(trimmed)) {
-    return trimmed;
+    const [channels] = trimmed.split('/');
+    return channels.trim();
   }
 
   return trimmed;
