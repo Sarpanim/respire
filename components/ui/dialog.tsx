@@ -83,7 +83,7 @@ export function DialogContent({ className, children }: { className?: string; chi
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative z-50 w-full max-w-3xl rounded-2xl border border-border bg-background p-6 shadow-2xl',
+          'relative z-50 w-full max-w-3xl rounded-[var(--radius-card)] border border-border bg-card text-card-foreground p-6 shadow-2xl',
           className
         )}
         onClick={(event) => event.stopPropagation()}
@@ -100,7 +100,7 @@ export function DialogHeader({ className, children }: { className?: string; chil
 }
 
 export function DialogTitle({ className, children }: { className?: string; children: ReactNode }) {
-  return <h2 className={cn('text-lg font-semibold text-foreground', className)}>{children}</h2>;
+  return <h2 className={cn('text-lg font-semibold text-card-foreground', className)}>{children}</h2>;
 }
 
 export function DialogDescription({ className, children }: { className?: string; children: ReactNode }) {

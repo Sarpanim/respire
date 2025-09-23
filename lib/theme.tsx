@@ -29,6 +29,7 @@ export function setTheme(theme: Theme) {
   }
 
   document.documentElement.dataset[DATA_ATTR] = theme;
+  document.documentElement.style.setProperty('--color-scheme', theme);
 
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');

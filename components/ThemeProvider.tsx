@@ -29,6 +29,10 @@ function applyTokensToDocument(tokens: ThemeTokens) {
   for (const [variable, value] of Object.entries(variables)) {
     root.style.setProperty(variable, value);
   }
+
+  const colorScheme = tokens.metadata?.colorScheme ?? DEFAULT_THEME_TOKENS.metadata.colorScheme;
+  root.dataset.theme = colorScheme;
+  root.classList.toggle('dark', colorScheme === 'dark');
 }
 
 type ThemeContextValue = {

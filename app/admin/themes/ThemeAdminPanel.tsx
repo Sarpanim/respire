@@ -27,6 +27,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { createBrowserClient } from '@/lib/supabase-browser';
 import {
+  ThemeColorToken,
   DEFAULT_THEME_TOKENS,
   ThemeTokens,
   ThemeTokensInput,
@@ -56,7 +57,7 @@ type EditorState = {
   initialTokens: ThemeTokens;
 };
 
-type ColorTokenKey = keyof typeof DEFAULT_THEME_TOKENS.colors;
+type ColorTokenKey = ThemeColorToken;
 
 const COLOR_FIELDS: Array<{ key: ColorTokenKey; label: string }> = [
   { key: 'primary', label: 'Primaire' },

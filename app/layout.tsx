@@ -21,6 +21,7 @@ export default async function RootLayout({
   let session: Session | null = null;
   const themeTokens = await fetchActiveThemeTokens();
   const htmlStyle = themeTokensToCssVariables(themeTokens) as CSSProperties;
+  const colorScheme = themeTokens.metadata.colorScheme;
 
   try {
     const supabase = createClient();
@@ -33,7 +34,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="fr" style={htmlStyle}>
+    <html lang="fr" style={htmlStyle} data-theme={colorScheme} className={colorScheme === 'dark' ? 'dark' : undefined}>
       <body className="min-h-screen bg-gradient-to-b from-background via-background to-background-muted">
         <ThemeProvider initialTokens={themeTokens}>
           <Header session={session} />

@@ -2,51 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: var(--color-scheme, dark);
-  --color-scheme: dark;
-  --color-background: 2 6 23;
-  --color-background-muted: 15 23 42;
-  --color-card: 15 23 42;
-  --color-card-foreground: 226 232 240;
-  --color-muted: 31 41 55;
-  --color-muted-foreground: 148 163 184;
-  --color-accent: 31 41 55;
-  --color-accent-foreground: 248 250 252;
-  --color-border: 30 41 59;
-  --color-input: 15 23 42;
-  --color-ring: 58 141 255;
-  --color-foreground: 248 250 252;
-  --color-primary: 58 141 255;
-  --color-primary-dark: 27 101 212;
-  --color-primary-foreground: 255 255 255;
-  --radius-card: 1rem;
-  --radius-pill: 9999px;
-  --space-3: 0.75rem;
-  --space-6: 1.5rem;
-  --btn-primary-padding-y: var(--space-3);
-  --btn-primary-padding-x: var(--space-6);
-  --btn-primary-translate-y: -0.125rem;
-  --btn-primary-shadow: 0 4px 6px -1px rgb(var(--color-primary) / 0.35),
-    0 2px 4px -2px rgb(var(--color-primary) / 0.2);
-  --btn-primary-shadow-hover: 0 10px 25px -10px rgb(var(--color-primary) / 0.45),
-    0 8px 16px -12px rgb(var(--color-primary) / 0.35);
-  --card-padding: var(--space-6);
-  --card-shadow: 0 18px 50px -15px rgb(var(--color-background) / 0.5);
-  --card-backdrop-blur: 20px;
-}
+@layer base {
+  :root {
+    color-scheme: var(--color-scheme, dark);
+    --color-scheme: dark;
+    --color-background: 2 6 23;
+    --color-background-muted: 15 23 42;
+    --color-card: 15 23 42;
+    --color-card-foreground: 226 232 240;
+    --color-foreground: 248 250 252;
+    --color-primary: 58 141 255;
+    --color-primary-dark: 27 101 212;
+    --color-primary-foreground: 255 255 255;
+    --color-muted: 31 41 55;
+    --color-muted-foreground: 148 163 184;
+    --color-accent: 31 41 55;
+    --color-accent-foreground: 248 250 252;
+    --color-border: 30 41 59;
+    --color-input: 15 23 42;
+    --color-ring: 58 141 255;
+    --radius-card: 1rem;
+    --radius-pill: 9999px;
+    --space-3: 0.75rem;
+    --space-6: 1.5rem;
+    --btn-primary-padding-y: var(--space-3);
+    --btn-primary-padding-x: var(--space-6);
+    --btn-primary-translate-y: -0.125rem;
+    --btn-primary-shadow: 0 4px 6px -1px rgb(var(--color-primary) / 0.35),
+      0 2px 4px -2px rgb(var(--color-primary) / 0.2);
+    --btn-primary-shadow-hover: 0 10px 25px -10px rgb(var(--color-primary) / 0.45),
+      0 8px 16px -12px rgb(var(--color-primary) / 0.35);
+    --card-padding: var(--space-6);
+    --card-shadow: 0 18px 50px -15px rgb(var(--color-background) / 0.5);
+    --card-backdrop-blur: 20px;
+  }
 
-body {
-  @apply min-h-screen bg-background text-foreground antialiased;
-}
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+  }
 
-a {
-  @apply text-primary underline-offset-4 transition-colors hover:text-primary-dark;
-}
+  a {
+    @apply text-primary underline-offset-4 transition-colors hover:text-primary-dark;
+  }
 
-button:focus-visible,
-a:focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  button:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
 }
 
 @layer components {
@@ -85,9 +87,8 @@ a:focus-visible {
   }
 
   .card {
-    @apply border border-border bg-card text-card-foreground;
+    @apply border border-border bg-card/70 text-card-foreground;
     border-radius: var(--radius-card);
-    background-color: rgb(var(--color-card) / 0.7);
     padding: var(--card-padding);
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(var(--card-backdrop-blur));
