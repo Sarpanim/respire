@@ -17,6 +17,7 @@ yarn-error.log*
 
 # Env files
 .env*
+!.env.local.example
 .supabase
 
 # Lockfiles

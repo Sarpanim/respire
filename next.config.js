@@ -1,12 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-    ],
+  reactStrictMode: true,
+  experimental: {
+    typedRoutes: true,
+  },
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+  },
+  eslint: {
+    dirs: ['src'],
   },
 };
 
