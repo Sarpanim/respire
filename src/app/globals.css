@@ -207,3 +207,263 @@ a:hover {
   font-size: 0.95rem;
   line-height: 1.6;
 }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.course-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .course-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0;
+  overflow: hidden;
+}
+
+.course-card__media {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: rgba(148, 163, 184, 0.2);
+  overflow: hidden;
+}
+
+.course-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-card__body {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.75rem 1.75rem 0;
+}
+
+.course-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.course-card__level {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.course-card__meta {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.course-card__meta dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.course-card__meta dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.course-card__footer {
+  padding: 0 1.75rem 1.75rem;
+}
+
+.course-navigation {
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 0.4rem;
+}
+
+.course-navigation ul {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.course-navigation__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.course-navigation__link:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--accent);
+}
+
+.course-navigation__link--active {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: 0 12px 20px -14px rgba(37, 99, 235, 0.7);
+}
+
+.course-player {
+  display: grid;
+  gap: 2rem;
+}
+
+.course-player__header {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .course-player__header {
+    grid-template-columns: 320px 1fr;
+    align-items: start;
+  }
+}
+
+.course-player__cover {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(148, 163, 184, 0.2);
+  aspect-ratio: 16 / 9;
+}
+
+.course-player__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-player__placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(148, 163, 184, 0.2),
+    rgba(148, 163, 184, 0.2) 12px,
+    rgba(148, 163, 184, 0.3) 12px,
+    rgba(148, 163, 184, 0.3) 24px
+  );
+}
+
+.course-player__info {
+  display: grid;
+  gap: 1rem;
+}
+
+.course-player__meta {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.course-player__meta dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.course-player__meta dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.course-player__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.course-player__content {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.course-lessons ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.lesson-card {
+  list-style: none;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.015);
+}
+
+.lesson-card__body {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lesson-card__title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.lesson-card__summary {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.lesson-card__duration {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.lesson-detail {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lesson-detail__header {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lesson-detail__content {
+  display: grid;
+  gap: 1rem;
+  line-height: 1.7;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.back-link:hover {
+  color: var(--accent);
+}

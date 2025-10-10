@@ -30,4 +30,13 @@ export type Lesson = {
   updatedAt: string | null;
 };
 
+export type User = {
+  id: string;
+  email: string | null;
+  fullName: string | null;
+  avatarUrl: string | null;
+  createdAt: string;
+  updatedAt: string | null;
+};
+
 export type CourseWithLessons = Course & { lessons: Lesson[] };

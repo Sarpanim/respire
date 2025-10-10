@@ -35,41 +35,39 @@ export default async function LessonDetailPage({ params }: LessonPageProps) {
   const courseHref = (course ? `/courses/${course.slug}` : '/courses') as Route;
 
   return (
-    <article className="surface-card" style={{ display: 'grid', gap: '1rem' }}>
-      <Link href={courseHref} className="card-description" style={{ display: 'inline-flex', gap: '0.35rem' }}>
+    <div className="stack">
+      <Link href={courseHref} className="back-link">
         ← Back to course
       </Link>
 
-      <header>
-        <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.35rem' }}>
-          Lesson {resolvedLesson.position ?? '—'}
-        </p>
-        <h1 style={{ margin: 0 }}>{resolvedLesson.title}</h1>
-      </header>
+      <article className="surface-card lesson-detail">
+        <header className="lesson-detail__header">
+          <p className="lesson-card__duration">Lesson {resolvedLesson.position ?? '—'}</p>
+          <h1>{resolvedLesson.title}</h1>
+        </header>
 
-      {resolvedLesson.summary ? <p className="card-description">{resolvedLesson.summary}</p> : null}
+        {resolvedLesson.summary ? <p className="card-description">{resolvedLesson.summary}</p> : null}
 
-      {resolvedLesson.durationMinutes !== null ? (
-        <p style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>
-          Estimated duration: {resolvedLesson.durationMinutes} minutes
-        </p>
-      ) : null}
+        {resolvedLesson.durationMinutes !== null ? (
+          <p className="lesson-card__duration">Estimated duration: {resolvedLesson.durationMinutes} minutes</p>
+        ) : null}
 
-      {resolvedLesson.content ? (
-        <div style={{ display: 'grid', gap: '0.75rem', lineHeight: 1.7 }}>
-          {resolvedLesson.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} style={{ margin: 0 }}>
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      ) : null}
+        {resolvedLesson.content ? (
+          <div className="lesson-detail__content">
+            {resolvedLesson.content.split('\n\n').map((paragraph, index) => (
+              <p key={index}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : null}
 
-      {resolvedLesson.videoUrl ? (
-        <a className="button button--primary" href={resolvedLesson.videoUrl} target="_blank" rel="noreferrer">
-          Open resource
-        </a>
-      ) : null}
-    </article>
+        {resolvedLesson.videoUrl ? (
+          <a className="button button--primary" href={resolvedLesson.videoUrl} target="_blank" rel="noreferrer">
+            Open resource
+          </a>
+        ) : null}
+      </article>
+    </div>
   );
 }

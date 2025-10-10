@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { Route } from 'next';
 
+import { CoursePlayer } from '@/components/courses/CoursePlayer';
+import { LessonCard } from '@/components/courses/LessonCard';
 import { getCourseBySlug } from '@/lib/db/courses';
 
 export type CoursePageProps = {
@@ -30,67 +32,45 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
   }
 
   const resolvedCourse = course;
-  const totalMinutes = resolvedCourse.totalDurationMinutes;
-  const hasRating = resolvedCourse.ratingAverage !== null && resolvedCourse.ratingCount !== null;
+  const firstLesson = resolvedCourse.lessons[0] ?? null;
+  const actionHref = firstLesson ? (`/courses/lessons/${firstLesson.id}` as Route) : null;
 
   return (
-    <div className="grid" style={{ gap: '1.5rem' }}>
-      <section className="surface-card">
-        <Link href={'/courses' as Route} className="card-description" style={{ display: 'inline-flex', gap: '0.35rem' }}>
-          ← Back to courses
-        </Link>
+    <div className="stack">
+      <Link href={'/courses' as Route} className="back-link">
+        ← Back to courses
+      </Link>
 
-        <h1 style={{ marginTop: '1rem' }}>{resolvedCourse.title}</h1>
-        {resolvedCourse.description ? <p className="card-description">{resolvedCourse.description}</p> : null}
+      <CoursePlayer
+        course={resolvedCourse}
+        actions={
+          actionHref ? (
+            <Link className="button button--primary" href={actionHref}>
+              Start first lesson
+            </Link>
+          ) : undefined
+        }
+      >
+        <section className="course-lessons">
+          <header>
+            <h2 className="card-title">Lessons</h2>
+            <p className="card-description">
+              Explore each lesson to dive deeper into the course material.
+            </p>
+          </header>
 
-        <dl style={{ display: 'grid', gap: '0.75rem', marginTop: '2rem' }}>
-          {totalMinutes !== null ? (
-            <div>
-              <dt style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--muted)' }}>Total duration</dt>
-              <dd style={{ margin: 0 }}>{totalMinutes} minutes</dd>
-            </div>
-          ) : null}
-
-          {hasRating ? (
-            <div>
-              <dt style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--muted)' }}>Rating</dt>
-              <dd style={{ margin: 0 }}>
-                {resolvedCourse.ratingAverage?.toFixed(1)} / 5 · {resolvedCourse.ratingCount} reviews
-              </dd>
-            </div>
-          ) : null}
-        </dl>
-      </section>
-
-      <section className="surface-card">
-        <h2 className="card-title">Lessons</h2>
-
-        {!resolvedCourse.lessons.length ? (
-          <p className="card-description">No lessons yet. Add a lesson to start building this course.</p>
-        ) : (
-          <ol style={{ display: 'grid', gap: '1rem', paddingLeft: '1rem' }}>
-            {resolvedCourse.lessons.map((lesson) => {
-              const href = `/courses/lessons/${lesson.id}` as Route;
-
-              return (
-                <li key={lesson.id} style={{ listStyle: 'decimal' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                    <Link href={href} className="card-title" style={{ fontSize: '1rem' }}>
-                      {lesson.title}
-                    </Link>
-                    {lesson.summary ? <p className="card-description">{lesson.summary}</p> : null}
-                    {lesson.durationMinutes !== null ? (
-                      <span style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>
-                        {lesson.durationMinutes} minutes
-                      </span>
-                    ) : null}
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        )}
-      </section>
+          {!resolvedCourse.lessons.length ? (
+            <p className="card-description">No lessons yet. Add a lesson to start building this course.</p>
+          ) : (
+            <ol>
+              {resolvedCourse.lessons.map((lesson) => {
+                const href = `/courses/lessons/${lesson.id}` as Route;
+                return <LessonCard key={lesson.id} lesson={lesson} href={href} />;
+              })}
+            </ol>
+          )}
+        </section>
+      </CoursePlayer>
     </div>
   );
 }
