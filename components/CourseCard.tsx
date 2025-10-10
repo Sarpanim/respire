@@ -62,10 +62,13 @@ export default function CourseCard({ course }: { course: Course }) {
         <span>{totalDuration} min</span>
         <span>{lessonCount} leçon{lessonCount > 1 ? 's' : ''}</span>
       </div>
-      <div className="flex items-center gap-1 text-xs font-medium text-foreground">
-        <span aria-hidden className="text-base leading-none text-amber-400">★</span>
-        <span>{averageRating}</span>
-        <span className="text-muted-foreground">({course.reviewsCount} avis)</span>
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
+        <div className="flex items-baseline gap-1 text-foreground">
+          <span aria-hidden className="text-base leading-none text-amber-400">★</span>
+          <span className="text-sm font-semibold leading-none">{averageRating}</span>
+          <span className="font-medium">/ 5</span>
+        </div>
+        <span>({course.reviewsCount} avis)</span>
       </div>
       <span className="mt-auto text-sm font-semibold text-primary transition-colors group-hover:text-primary/80">
         Découvrir →

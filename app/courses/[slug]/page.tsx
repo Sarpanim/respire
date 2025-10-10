@@ -75,11 +75,14 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
               </div>
               <div className="rounded-xl border border-border/70 bg-muted/60 p-3 backdrop-blur-sm dark:border-white/15 dark:bg-white/10">
                 <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Avis clients</p>
-                <p className="mt-1 flex items-center gap-2 text-base font-semibold text-foreground">
-                  <span aria-hidden className="text-lg leading-none text-amber-400">★</span>
-                  {averageRating} / 5
-                  <span className="text-xs font-normal text-muted-foreground">({course.reviewsCount} avis)</span>
-                </p>
+                <div className="mt-2 flex items-center justify-between gap-3">
+                  <div className="flex items-baseline gap-1 text-foreground">
+                    <span aria-hidden className="text-xl leading-none text-amber-400">★</span>
+                    <span className="text-2xl font-semibold leading-none">{averageRating}</span>
+                    <span className="text-sm font-medium text-muted-foreground">/ 5</span>
+                  </div>
+                  <span className="text-xs font-medium text-muted-foreground">{course.reviewsCount} avis</span>
+                </div>
               </div>
             </div>
           </div>
