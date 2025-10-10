@@ -10,13 +10,17 @@ export type AdminShellProps = {
 
 export default function AdminShell({ title, description, actions, children }: AdminShellProps) {
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-slate-800 bg-slate-950/60 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 sm:flex-row sm:items-end sm:justify-between">
+    <div className="relative min-h-screen">
+      <header className="relative overflow-hidden border-b border-border/60 bg-card/80 backdrop-blur">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_top,hsl(var(--accent-gradient-from)/0.35),transparent_70%)]"
+        />
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Admin</p>
-            {title ? <h1 className="text-2xl font-semibold text-white">{title}</h1> : null}
-            {description ? <p className="text-sm text-slate-300">{description}</p> : null}
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Admin</p>
+            {title ? <h1 className="text-2xl font-semibold text-foreground">{title}</h1> : null}
+            {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
           </div>
           {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
         </div>

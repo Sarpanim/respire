@@ -46,7 +46,7 @@ export default function AudioPlayer({ progressKey, src, ariaLabel }: AudioPlayer
       controls
       preload="metadata"
       aria-label={ariaLabel ?? 'Lecteur audio'}
-      className="w-full rounded-xl border border-slate-700 bg-slate-900 p-3"
+      className="w-full rounded-xl border border-border/70 bg-card/80 p-3 shadow-inner backdrop-blur-sm dark:border-white/15 dark:bg-white/10"
     >
       <source src={src} type="audio/mpeg" />
       Votre navigateur ne supporte pas la lecture audio.

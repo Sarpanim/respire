@@ -20,7 +20,10 @@ export default function HomePage() {
           <Link href="/login" className="btn btn-primary">
             Se connecter
           </Link>
-          <Link href="/courses" className="btn btn-ghost border border-slate-300 bg-transparent text-slate-900 hover:border-slate-400 dark:border-slate-700 dark:text-slate-100 dark:hover:border-slate-500">
+          <Link
+            href="/courses"
+            className="btn btn-ghost border border-border bg-transparent text-foreground hover:border-foreground/40 dark:border-white/20 dark:text-white dark:hover:border-white/40"
+          >
             Parcourir les cours
           </Link>
         </div>

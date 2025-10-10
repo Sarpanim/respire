@@ -24,7 +24,12 @@ export default function CourseCard({ course }: { course: Course }) {
           styles.glow
         )}
       />
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900/80">
+      <div
+        className="relative aspect-video w-full overflow-hidden rounded-xl"
+        style={{
+          background: 'linear-gradient(135deg, hsl(var(--card-tint) / 0.22), hsl(var(--accent-gradient-to) / 0.2))',
+        }}
+      >
         <Image
           src={course.coverImage}
           alt="Illustration du cours"
@@ -33,14 +38,14 @@ export default function CourseCard({ course }: { course: Course }) {
           className="object-cover transition duration-500 group-hover:scale-105"
           priority={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/5 to-transparent dark:from-slate-950/45" aria-hidden />
       </div>
       <div className="relative flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
         <Badge className={styles.badge}>{categoryLabel}</Badge>
-        <Badge variant="outline" className="border-slate-500/40 text-slate-600 dark:border-slate-400/40 dark:text-slate-200">
+        <Badge variant="outline">
           {course.level}
         </Badge>
-        <span className="rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-1 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5 dark:text-white">
+        <span className="rounded-full border border-border/70 bg-muted/60 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white">
           {course.duration} min
         </span>
       </div>

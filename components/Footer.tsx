@@ -11,7 +11,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-slate-200/60 bg-white/80 backdrop-blur dark:border-slate-800/60 dark:bg-slate-950/70">
+    <footer className="mt-auto border-t border-slate-200/70 bg-white/85 backdrop-blur dark:border-slate-700/60 dark:bg-slate-900/60">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
           <p className="text-base font-semibold text-slate-900 dark:text-white">Respire</p>
@@ -32,7 +32,7 @@ export default function Footer() {
           ))}
         </nav>
       </div>
-      <div className="border-t border-slate-200/50 bg-white/70 py-4 text-center text-xs text-slate-500 dark:border-slate-800/50 dark:bg-slate-950/60 dark:text-slate-400">
+      <div className="border-t border-slate-200/60 bg-white/75 py-4 text-center text-xs text-slate-500 dark:border-slate-700/50 dark:bg-slate-900/50 dark:text-slate-400">
         © {currentYear} Respire. Tous droits réservés.
       </div>
     </footer>

@@ -12,7 +12,7 @@ const navLinks = [
 
 export default function Header({ session }: { session: Session | null }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur transition dark:border-slate-800/60 dark:bg-slate-950/70">
+    <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur transition dark:border-slate-700/60 dark:bg-slate-900/60">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:flex-nowrap sm:py-5">
         <Link href="/" className="flex items-center gap-3 text-lg font-semibold text-slate-900 transition-colors dark:text-white">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/30">
@@ -31,7 +31,7 @@ export default function Header({ session }: { session: Session | null }) {
               className={cn(
                 'rounded-full px-4 py-2 text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-                'dark:text-slate-200 dark:hover:bg-slate-800/80 dark:hover:text-white'
+                'dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white'
               )}
             >
               {link.label}

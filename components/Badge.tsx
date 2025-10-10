@@ -15,8 +15,8 @@ export default function Badge({
       className={cn(
         'inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide',
         variant === 'default'
-          ? 'bg-primary/20 text-primary'
-          : 'border border-slate-600/70 text-slate-300 dark:border-slate-400/40 dark:text-slate-200',
+          ? 'bg-primary/15 text-primary ring-1 ring-inset ring-primary/20'
+          : 'border border-border/70 text-muted-foreground',
         className
       )}
     >

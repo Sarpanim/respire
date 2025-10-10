@@ -18,9 +18,10 @@ const ACTION_VARIANT_CLASSNAMES: Record<SectionActionVariant, string> = {
 
 const HERO_TONE_CONTENT_CLASSNAMES: Record<SectionTone, string> = {
   default: 'card w-full space-y-6',
-  muted: 'w-full space-y-6 rounded-2xl border border-border bg-muted/60 p-8 text-muted-foreground dark:bg-slate-900/50 dark:text-slate-300',
+  muted:
+    'w-full space-y-6 rounded-2xl border border-border bg-muted/60 p-8 text-muted-foreground dark:bg-slate-900/30 dark:text-slate-200',
   primary:
-    'card w-full space-y-6 bg-gradient-to-br from-sky-100 via-white to-white text-slate-900 dark:from-slate-900/90 dark:via-slate-900/80 dark:to-slate-950 dark:text-white',
+    'card w-full space-y-6 bg-gradient-to-br from-sky-100 via-white to-white text-slate-900 dark:from-slate-900/65 dark:via-slate-900/50 dark:to-slate-950/80 dark:text-white',
 };
 
 function renderAction(action: HeroAction) {

@@ -6,9 +6,9 @@ import type { CardSection, HeroAction, SectionActionVariant, SectionLayout, Sect
 const CARD_TONE_CLASSNAMES: Record<SectionTone, string> = {
   default: 'card',
   muted:
-    'card bg-muted/60 text-muted-foreground shadow-none ring-1 ring-inset ring-muted dark:bg-slate-900/50 dark:text-slate-300',
+    'card bg-muted/60 text-muted-foreground shadow-none ring-1 ring-inset ring-muted dark:bg-slate-900/30 dark:text-slate-200',
   primary:
-    'card bg-gradient-to-br from-primary/30 via-primary/15 to-transparent text-primary-foreground ring-1 ring-primary/40 dark:from-primary/40 dark:via-primary/25',
+    'card bg-gradient-to-br from-primary/25 via-primary/10 to-transparent text-primary-foreground ring-1 ring-primary/35 dark:from-primary/35 dark:via-primary/18',
 };
 
 const CARD_LAYOUT_CLASSNAMES: Record<SectionLayout, string> = {

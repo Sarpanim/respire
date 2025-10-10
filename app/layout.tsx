@@ -29,7 +29,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="fr" className="dark" suppressHydrationWarning>
+    <html lang="fr" className="dark theme-azure" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased transition-colors">
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">

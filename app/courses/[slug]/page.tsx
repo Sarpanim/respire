@@ -40,13 +40,10 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
               <Badge className={styles.badge}>{categoryLabel}</Badge>
-              <Badge
-                variant="outline"
-                className="border-slate-500/40 text-slate-600 dark:border-slate-400/40 dark:text-slate-200"
-              >
+              <Badge variant="outline">
                 {course.level}
               </Badge>
-              <span className="rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-1 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5 dark:text-white">
+              <span className="rounded-full border border-border/70 bg-muted/60 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white">
                 {course.duration} min cumulés
               </span>
             </div>
@@ -58,7 +55,12 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
               <span>{lessonCount} leçon{lessonCount > 1 ? 's' : ''}</span>
             </div>
           </div>
-          <div className="relative h-56 overflow-hidden rounded-2xl bg-slate-900/80 shadow-inner lg:h-full">
+          <div
+            className="relative h-56 overflow-hidden rounded-2xl shadow-inner lg:h-full"
+            style={{
+              background: 'linear-gradient(135deg, hsl(var(--card-tint) / 0.24), hsl(var(--accent-gradient-to) / 0.18))',
+            }}
+          >
             <Image
               src={course.coverImage}
               alt={`Illustration du cours ${course.title}`}
@@ -67,7 +69,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
               className="object-cover"
               priority={false}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" aria-hidden />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/8 to-transparent" aria-hidden />
           </div>
         </div>
       </div>
@@ -81,7 +83,13 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
               </div>
               <div className="flex w-full flex-col gap-3 lg:max-w-xs">
                 <ProgressBar value={section.progress} label="Progression de la section" />
-                <div className="relative h-32 overflow-hidden rounded-xl bg-slate-900/80">
+                <div
+                  className="relative h-32 overflow-hidden rounded-xl"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, hsl(var(--card-tint) / 0.2), hsl(var(--accent-gradient-to) / 0.15))',
+                  }}
+                >
                   <Image
                     src={section.image}
                     alt={`Illustration de la section ${section.title}`}
@@ -89,7 +97,7 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
                     sizes="(min-width: 1024px) 260px, 100vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" aria-hidden />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-slate-950/8 to-transparent" aria-hidden />
                 </div>
               </div>
             </div>
@@ -100,7 +108,13 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
                   className="group flex h-full flex-col gap-4 rounded-2xl border border-border/70 bg-card/80 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-lg"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="relative h-16 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-900/80">
+                    <div
+                      className="relative h-16 w-20 flex-shrink-0 overflow-hidden rounded-xl"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, hsl(var(--card-tint) / 0.24), hsl(var(--accent-gradient-to) / 0.18))',
+                      }}
+                    >
                       <Image
                         src={lesson.image}
                         alt={`Illustration de la leçon ${lesson.title}`}
