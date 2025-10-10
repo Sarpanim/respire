@@ -1,19 +1,23 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function LoginForm() {
   return (
-    <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
-        La connexion par e-mail est momentanément désactivée. Nous travaillons à une nouvelle
-        expérience d’authentification.
-      </p>
-      <button
-        type="button"
-        className="w-full rounded-xl bg-muted py-3 text-sm font-semibold text-muted-foreground"
-        disabled
+    <div className="space-y-6">
+      <div className="space-y-2 text-sm text-muted-foreground">
+        <p>
+          L’authentification par e-mail sera bientôt de retour. En attendant, vous pouvez consulter le tableau de
+          bord en accès invité.
+        </p>
+        <p>Nous vous préviendrons dès que la connexion sécurisée sera réactivée.</p>
+      </div>
+      <Link
+        href="/dashboard"
+        className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:opacity-90"
       >
-        Connexion indisponible
-      </button>
+        Accéder au tableau de bord
+      </Link>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 
 export const dynamic = 'force-dynamic';
@@ -10,14 +9,18 @@ export default async function DashboardPage() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
-    redirect('/login');
-  }
-
-  const userEmail = session.user.email ?? 'membre';
+  const userEmail = session?.user.email ?? 'invité';
 
   return (
     <section className="space-y-8">
+      {!session && (
+        <div className="card border border-primary/20 bg-primary/5 text-sm text-primary">
+          <p>
+            Vous consultez actuellement le tableau de bord en accès invité. Les connexions sécurisées seront
+            réintroduites prochainement.
+          </p>
+        </div>
+      )}
       <div className="card space-y-3">
         <p className="text-sm font-medium uppercase tracking-widest text-primary">Bienvenue</p>
         <h1 className="text-3xl font-semibold text-foreground">Ravi de vous revoir, {userEmail}.</h1>
