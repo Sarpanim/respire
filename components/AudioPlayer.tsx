@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function AudioPlayer({ slug, src }: { slug: string; src: string }) {
+type AudioPlayerProps = {
+  progressKey: string;
+  src: string;
+  ariaLabel?: string;
+};
+
+export default function AudioPlayer({ progressKey, src, ariaLabel }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -11,7 +17,7 @@ export default function AudioPlayer({ slug, src }: { slug: string; src: string }
       return;
     }
 
-    const storageKey = `course:${slug}:progress`;
+    const storageKey = `audio-progress:${progressKey}`;
     const savedProgress = window.localStorage.getItem(storageKey);
     if (savedProgress) {
       audioElement.currentTime = Number(savedProgress);
@@ -32,14 +38,14 @@ export default function AudioPlayer({ slug, src }: { slug: string; src: string }
       audioElement.removeEventListener('timeupdate', handleTimeUpdate);
       audioElement.removeEventListener('ended', handleEnded);
     };
-  }, [slug]);
+  }, [progressKey]);
 
   return (
     <audio
       ref={audioRef}
       controls
       preload="metadata"
-      aria-label="Lecteur audio du cours"
+      aria-label={ariaLabel ?? 'Lecteur audio'}
       className="w-full rounded-xl border border-slate-700 bg-slate-900 p-3"
     >
       <source src={src} type="audio/mpeg" />
