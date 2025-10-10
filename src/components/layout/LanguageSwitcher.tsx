@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import type { Route } from 'next';
 
 import { locales, type Locale } from '@/types';
+import { buildPathWithLocale } from '@/lib/navigation/localization';
 
 type LanguageSwitcherProps = {
   currentLocale: Locale;
@@ -20,12 +21,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
       return;
     }
 
-    const segments = pathname?.split('/') ?? [];
-    if (segments.length > 1) {
-      segments[1] = locale;
-    }
-
-    const nextPath = (segments.join('/') || `/${locale}`) as Route;
+    const nextPath = buildPathWithLocale(pathname, locale) as Route;
 
     startTransition(() => {
       router.push(nextPath);
