@@ -11,6 +11,12 @@ export default function CourseCard({ course }: { course: Course }) {
 
   const styles = courseCategoryTokens[course.category];
   const lessonCount = course.sections.reduce((count, section) => count + section.lessons.length, 0);
+  const totalDuration = course.sections.reduce(
+    (courseTotal, section) =>
+      courseTotal + section.lessons.reduce((sectionTotal, lesson) => sectionTotal + lesson.duration, 0),
+    0
+  );
+  const averageRating = course.rating.toFixed(1);
 
   return (
     <Link
@@ -46,15 +52,20 @@ export default function CourseCard({ course }: { course: Course }) {
           {course.level}
         </Badge>
         <span className="rounded-full border border-border/70 bg-muted/60 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white">
-          {course.duration} min
+          {totalDuration} min
         </span>
       </div>
       <h3 className="text-lg font-semibold text-foreground">{course.title}</h3>
       <p className="text-sm text-muted-foreground">{course.summary}</p>
       <ProgressBar value={course.progress} label="Progression du cours" />
       <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span>{course.duration} min</span>
+        <span>{totalDuration} min</span>
         <span>{lessonCount} leçon{lessonCount > 1 ? 's' : ''}</span>
+      </div>
+      <div className="flex items-center gap-1 text-xs font-medium text-foreground">
+        <span aria-hidden className="text-base leading-none text-amber-400">★</span>
+        <span>{averageRating}</span>
+        <span className="text-muted-foreground">({course.reviewsCount} avis)</span>
       </div>
       <span className="mt-auto text-sm font-semibold text-primary transition-colors group-hover:text-primary/80">
         Découvrir →

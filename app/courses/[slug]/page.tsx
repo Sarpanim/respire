@@ -19,6 +19,12 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
 
   const styles = courseCategoryTokens[course.category];
   const lessonCount = course.sections.reduce((total, section) => total + section.lessons.length, 0);
+  const totalDuration = course.sections.reduce(
+    (courseTotal, section) =>
+      courseTotal + section.lessons.reduce((sectionTotal, lesson) => sectionTotal + lesson.duration, 0),
+    0
+  );
+  const averageRating = course.rating.toFixed(1);
 
   return (
     <article className="mx-auto flex w-full max-w-5xl flex-col gap-8">
@@ -44,15 +50,37 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
                 {course.level}
               </Badge>
               <span className="rounded-full border border-border/70 bg-muted/60 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white">
-                {course.duration} min cumulés
+                {totalDuration} min cumulés
               </span>
             </div>
             <h1 className="text-3xl font-semibold text-foreground lg:text-4xl">{course.title}</h1>
             <p className="text-sm leading-relaxed text-muted-foreground">{course.summary}</p>
             <ProgressBar value={course.progress} label="Progression du cours" className="max-w-md" />
-            <div className="flex flex-wrap gap-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-              <span>{course.sections.length} section{course.sections.length > 1 ? 's' : ''}</span>
-              <span>{lessonCount} leçon{lessonCount > 1 ? 's' : ''}</span>
+            <div className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+              <div className="rounded-xl border border-border/70 bg-muted/60 p-3 backdrop-blur-sm dark:border-white/15 dark:bg-white/10">
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Durée totale</p>
+                <p className="mt-1 text-base font-semibold text-foreground">{totalDuration} min</p>
+              </div>
+              <div className="rounded-xl border border-border/70 bg-muted/60 p-3 backdrop-blur-sm dark:border-white/15 dark:bg-white/10">
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Sections</p>
+                <p className="mt-1 text-base font-semibold text-foreground">
+                  {course.sections.length} section{course.sections.length > 1 ? 's' : ''}
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/70 bg-muted/60 p-3 backdrop-blur-sm dark:border-white/15 dark:bg-white/10">
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Leçons</p>
+                <p className="mt-1 text-base font-semibold text-foreground">
+                  {lessonCount} leçon{lessonCount > 1 ? 's' : ''}
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/70 bg-muted/60 p-3 backdrop-blur-sm dark:border-white/15 dark:bg-white/10">
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Avis clients</p>
+                <p className="mt-1 flex items-center gap-2 text-base font-semibold text-foreground">
+                  <span aria-hidden className="text-lg leading-none text-amber-400">★</span>
+                  {averageRating} / 5
+                  <span className="text-xs font-normal text-muted-foreground">({course.reviewsCount} avis)</span>
+                </p>
+              </div>
             </div>
           </div>
           <div
@@ -125,8 +153,8 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
                     </div>
                     <div className="space-y-1">
                       <h3 className="text-base font-semibold text-foreground">{lesson.title}</h3>
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                        {lesson.duration} min · {Math.round(lesson.progress * 100)}%
+                      <p className="text-xs font-medium text-muted-foreground">
+                        Durée : {lesson.duration} min · Progression : {Math.round(lesson.progress * 100)}%
                       </p>
                     </div>
                   </div>

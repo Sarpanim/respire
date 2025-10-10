@@ -29,6 +29,8 @@ export type Course = {
   duration: number;
   coverImage: string;
   progress: number;
+  rating: number;
+  reviewsCount: number;
   sections: CourseSection[];
 };
 
@@ -43,6 +45,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=1600&q=80',
     progress: 0.42,
+    rating: 4.8,
+    reviewsCount: 186,
     sections: [
       {
         id: 'fondations-respiratoires',
@@ -103,6 +107,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80',
     progress: 0.63,
+    rating: 4.7,
+    reviewsCount: 214,
     sections: [
       {
         id: 'detente-progressive',
@@ -161,6 +167,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80',
     progress: 0.29,
+    rating: 4.6,
+    reviewsCount: 152,
     sections: [
       {
         id: 'structure-rythme',
@@ -219,6 +227,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1478476868527-002ae3f3e159?auto=format&fit=crop&w=1600&q=80',
     progress: 0.51,
+    rating: 4.9,
+    reviewsCount: 268,
     sections: [
       {
         id: 'ouverture-coeur',
@@ -277,6 +287,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?auto=format&fit=crop&w=1600&q=80',
     progress: 0.37,
+    rating: 4.5,
+    reviewsCount: 121,
     sections: [
       {
         id: 'preparation-marche',
@@ -335,6 +347,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1600&q=80',
     progress: 0.55,
+    rating: 4.4,
+    reviewsCount: 98,
     sections: [
       {
         id: 'reveil-douceur',
@@ -393,6 +407,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
     progress: 0.24,
+    rating: 4.7,
+    reviewsCount: 175,
     sections: [
       {
         id: 'immersion-marine',
@@ -451,6 +467,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80',
     progress: 0.68,
+    rating: 4.8,
+    reviewsCount: 203,
     sections: [
       {
         id: 'gratitude-personnelle',
@@ -509,6 +527,8 @@ export const courses: Course[] = [
     coverImage:
       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80',
     progress: 0.17,
+    rating: 4.6,
+    reviewsCount: 94,
     sections: [
       {
         id: 'exploration-lente',
