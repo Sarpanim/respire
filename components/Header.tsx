@@ -39,13 +39,13 @@ export default function Header({ session }: { session: Session | null }) {
             <form action={signOut}>
               <button
                 type="submit"
-                className="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="btn btn-ghost border border-slate-700/70 bg-transparent text-slate-100 hover:border-slate-500"
               >
                 Se déconnecter
               </button>
             </form>
           ) : (
-            <Link href="/login" className="btn-primary">
+            <Link href="/login" className="btn btn-primary">
               Se connecter
             </Link>
           )}

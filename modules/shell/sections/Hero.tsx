@@ -10,9 +10,9 @@ const SECTION_LAYOUT_CLASSNAMES: Record<SectionLayout, string> = {
 };
 
 const ACTION_VARIANT_CLASSNAMES: Record<SectionActionVariant, string> = {
-  primary: 'btn-primary',
+  primary: 'btn btn-primary',
   ghost:
-    'inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
+    'btn btn-ghost border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white',
   link: 'inline-flex items-center text-sm font-semibold text-primary underline-offset-4 transition hover:text-primary-dark',
 };
 

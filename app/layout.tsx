@@ -29,10 +29,10 @@ export default async function RootLayout({
 
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-slate-950 font-sans text-slate-100 antialiased">
         <ThemeProvider>
           <Header session={session} />
-          <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:pt-12">{children}</main>
+          <main className="mx-auto w-full max-w-6xl px-4 pb-24 pt-12 sm:pt-16">{children}</main>
         </ThemeProvider>
       </body>
     </html>

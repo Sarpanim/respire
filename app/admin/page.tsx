@@ -25,7 +25,7 @@ export default async function AdminPage() {
         <p className="text-sm text-slate-300">
           Les fonctionnalités d’administration seront disponibles prochainement.
         </p>
-        <Link href="/" className="btn-primary w-fit">
+        <Link href="/" className="btn btn-primary w-fit">
           Retour à l’accueil
         </Link>
       </div>
