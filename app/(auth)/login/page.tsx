@@ -6,13 +6,11 @@ export default function LoginPage() {
       <div className="card space-y-4">
         <h1 className="text-2xl font-semibold text-foreground">Connexion</h1>
         <p className="text-sm text-muted-foreground">
-          Recevez un lien magique dans votre boîte mail pour accéder à votre tableau de bord. Aucun mot de passe à retenir.
+          L’accès au tableau de bord est temporairement fermé. Nous mettons à jour notre système
+          d’authentification.
         </p>
         <LoginForm />
       </div>
-      <p className="text-xs text-muted-foreground">
-        Assurez-vous d’avoir configuré les URLs de redirection dans Supabase : <code className="text-foreground">/auth/callback</code>.
-      </p>
     </section>
   );
 }
