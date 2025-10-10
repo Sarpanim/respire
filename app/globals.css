@@ -27,25 +27,25 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 221 83% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 223 40% 8%;
+    --foreground: 210 40% 96%;
+    --card: 223 36% 14%;
+    --card-foreground: 210 40% 96%;
+    --popover: 223 36% 12%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 221 83% 64%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 32% 22%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 220 30% 24%;
+    --muted-foreground: 215 20% 72%;
+    --accent: 215 43% 38%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 221 83% 60%;
+    --border: 220 32% 26%;
+    --input: 220 32% 26%;
+    --ring: 221 83% 64%;
   }
 }
 
@@ -79,8 +79,16 @@
   }
 
   .card {
-    @apply rounded-2xl border border-border bg-card/90 text-card-foreground shadow-lg shadow-black/10 backdrop-blur transition-colors dark:shadow-black/30;
+    @apply relative overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-lg shadow-black/10 transition-colors dark:shadow-black/40;
     @apply p-6 sm:p-8;
+  }
+  .card::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/5 opacity-0 transition-opacity duration-300 dark:from-white/5 dark:via-white/0 dark:to-white/10;
+  }
+  .card:hover::after,
+  .card:focus-visible::after {
+    @apply opacity-100;
   }
   .card-blurred {
     @apply backdrop-blur;

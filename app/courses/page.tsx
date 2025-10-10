@@ -22,8 +22,8 @@ export default function CoursesPage({
   return (
     <section className="space-y-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-semibold text-white">Catalogue de méditations</h1>
-        <p className="text-sm text-slate-300">
+        <h1 className="text-3xl font-semibold text-foreground">Catalogue de méditations</h1>
+        <p className="text-sm text-muted-foreground">
           Filtrez par catégorie et par niveau pour trouver la séance adaptée à votre état du moment.
         </p>
       </div>
@@ -35,7 +35,7 @@ export default function CoursesPage({
           ))}
         </div>
       ) : (
-        <p className="rounded-xl border border-dashed border-slate-700 bg-slate-900/70 p-6 text-sm text-slate-300">
+        <p className="rounded-xl border border-dashed border-border bg-card/70 p-6 text-sm text-muted-foreground">
           Aucun cours ne correspond à votre recherche pour le moment. Essayez d’autres filtres.
         </p>
       )}
