@@ -11,6 +11,7 @@ import { AuthPanel } from '@/components/ui/AuthPanel';
 
 const NAV_LINKS = [
   { href: '/', scope: 'locale' as const, label: { en: 'Home', fr: 'Accueil' } },
+  { href: '/courses', scope: 'global' as const, label: { en: 'Courses', fr: 'Cours' } },
   { href: '/auth', scope: 'global' as const, label: { en: 'Auth', fr: 'Connexion' } },
 ];
 
