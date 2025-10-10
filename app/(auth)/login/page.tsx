@@ -6,8 +6,7 @@ export default function LoginPage() {
       <div className="card space-y-4">
         <h1 className="text-2xl font-semibold text-foreground">Connexion</h1>
         <p className="text-sm text-muted-foreground">
-          L’accès au tableau de bord est temporairement fermé. Nous mettons à jour notre système
-          d’authentification.
+          L’espace membre est ouvert en accès invité le temps de finaliser la nouvelle authentification.
         </p>
         <LoginForm />
       </div>

@@ -7,10 +7,10 @@ export default function LoginForm() {
     <div className="space-y-6">
       <div className="space-y-2 text-sm text-muted-foreground">
         <p>
-          L’authentification par e-mail sera bientôt de retour. En attendant, vous pouvez consulter le tableau de
-          bord en accès invité.
+          Profitez librement du tableau de bord pendant la mise à jour du système de connexion. Revenez prochainement
+          pour activer votre compte sécurisé.
         </p>
-        <p>Nous vous préviendrons dès que la connexion sécurisée sera réactivée.</p>
+        <p>Vous pourrez lier votre adresse e-mail dès que l’authentification sera prête.</p>
       </div>
       <Link
         href="/dashboard"

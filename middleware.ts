@@ -30,16 +30,6 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session && request.nextUrl.pathname.startsWith('/dashboard')) {
-    const redirectUrl = new URL('/login', request.url);
-    redirectUrl.searchParams.set('redirect_to', request.nextUrl.pathname);
-    return NextResponse.redirect(redirectUrl);
-  }
-
   return response;
 }
 
