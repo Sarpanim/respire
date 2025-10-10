@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import type { Route } from 'next';
 
 import { locales, type Locale } from '@/types';
 
@@ -24,7 +25,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
       segments[1] = locale;
     }
 
-    const nextPath = segments.join('/') || `/${locale}`;
+    const nextPath = (segments.join('/') || `/${locale}`) as Route;
 
     startTransition(() => {
       router.push(nextPath);

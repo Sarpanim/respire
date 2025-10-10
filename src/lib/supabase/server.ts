@@ -11,21 +11,15 @@ export const createServerSupabase = () => {
       cookies: {
         get: (name) => cookieStore.get(name)?.value,
         set: (name, value, options) => {
-          if ('set' in cookieStore) {
-            (cookieStore as typeof cookieStore & { set: typeof cookieStore.set }).set(
-              name,
-              value,
-              options
-            );
-          }
+          cookieStore.set(name, value, options);
         },
         remove: (name, options) => {
-          if ('delete' in cookieStore) {
-            (cookieStore as typeof cookieStore & { delete: typeof cookieStore.delete }).delete(
-              name,
-              options
-            );
-          }
+          cookieStore.set({
+            name,
+            value: '',
+            ...options,
+            maxAge: 0,
+          });
         },
       },
     }

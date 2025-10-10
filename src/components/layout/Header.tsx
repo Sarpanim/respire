@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { Route } from 'next';
 
 import type { Locale } from '@/types';
 
@@ -46,7 +47,7 @@ export function Header({ locale }: HeaderProps) {
         <nav className="site-nav" aria-label="Main navigation">
           {NAV_LINKS.map((link) => {
             const translatedLabel = link.label[locale];
-            const href = getHref(locale, link.href, link.scope);
+            const href = getHref(locale, link.href, link.scope) as Route;
             const isActive = pathname === href;
 
             return (

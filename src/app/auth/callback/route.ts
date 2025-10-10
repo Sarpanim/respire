@@ -23,7 +23,12 @@ export async function GET(request: Request) {
             response.cookies.set(name, value, options);
           },
           remove: (name, options) => {
-            response.cookies.delete(name, options);
+            response.cookies.set({
+              name,
+              value: '',
+              ...options,
+              maxAge: 0,
+            });
           },
         },
       }
