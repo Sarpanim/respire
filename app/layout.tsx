@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { createClient } from '@/lib/supabase-server';
 import type { Session } from '@supabase/supabase-js';
 import { ThemeProvider } from '@/lib/theme';
@@ -31,8 +32,11 @@ export default async function RootLayout({
     <html lang="fr" className="dark" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased transition-colors">
         <ThemeProvider>
-          <Header session={session} />
-          <main className="mx-auto w-full max-w-6xl px-4 pb-24 pt-12 sm:pt-16">{children}</main>
+          <div className="flex min-h-screen flex-col">
+            <Header session={session} />
+            <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-24 pt-12 sm:pt-16">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>
