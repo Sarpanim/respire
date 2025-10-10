@@ -7,6 +7,7 @@ export type Theme = 'light' | 'dark';
 type ThemeContextType = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -20,27 +21,47 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('dark');
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
     const storedTheme = localStorage.getItem('theme') as Theme | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = storedTheme ?? (prefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-  }, []);
+    setThemeState(initialTheme);
+  }, [isHydrated]);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme, isHydrated]);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(newTheme);
   };
 
-  const value = useMemo(() => ({ theme, setTheme }), [theme]);
+  const toggleTheme = () => {
+    setThemeState((current) => (current === 'dark' ? 'light' : 'dark'));
+  };
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme,
+      toggleTheme,
+    }),
+    [theme]
   );
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
