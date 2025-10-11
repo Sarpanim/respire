@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { Route } from 'next';
 
 import { CourseCard } from '@/components/courses/CourseCard';
-import { CourseNavigation } from '@/components/courses/CourseNavigation';
+import { CourseNavigation, type CourseNavigationItem } from '@/components/courses/CourseNavigation';
 import { listCourses } from '@/lib/db/courses';
 
 export const metadata: Metadata = {
@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Browse the courses available in the Respire starter.',
 };
 
-const navigationItems = [
+const navigationItems: CourseNavigationItem[] = [
   { label: 'All courses', href: '/courses' },
-  { label: 'My learning', href: '/courses?view=my-learning' },
-  { label: 'Saved', href: '/courses?view=saved' },
+  { label: 'My learning', href: { pathname: '/courses', query: { view: 'my-learning' } } },
+  { label: 'Saved', href: { pathname: '/courses', query: { view: 'saved' } } },
 ];
 
 export default async function CoursesPage() {
