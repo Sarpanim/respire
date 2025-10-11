@@ -4,15 +4,39 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Route } from 'next';
 
-import type { Locale } from '@/types';
+import type { Locale, LocalizedString } from '@/types';
 
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { AuthPanel } from '@/components/ui/AuthPanel';
 
-const NAV_LINKS = [
-  { href: '/', scope: 'locale' as const, label: { en: 'Home', fr: 'Accueil' } },
-  { href: '/courses', scope: 'global' as const, label: { en: 'Courses', fr: 'Cours' } },
-  { href: '/auth', scope: 'global' as const, label: { en: 'Auth', fr: 'Connexion' } },
+const NAV_LINKS: { href: string; scope: 'locale' | 'global'; label: LocalizedString }[] = [
+  {
+    href: '/',
+    scope: 'locale',
+    label: {
+      fr: 'Accueil',
+      es: 'Inicio',
+      en: 'Home',
+    },
+  },
+  {
+    href: '/courses',
+    scope: 'global',
+    label: {
+      fr: 'Cours',
+      es: 'Cursos',
+      en: 'Courses',
+    },
+  },
+  {
+    href: '/auth',
+    scope: 'global',
+    label: {
+      fr: 'Connexion',
+      es: 'Autenticación',
+      en: 'Auth',
+    },
+  },
 ];
 
 type HeaderProps = {

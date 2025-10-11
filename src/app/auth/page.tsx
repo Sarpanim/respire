@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { SessionProvider } from '@/components/layout/SessionProvider';
 import { createServerSupabase } from '@/lib/supabase/server';
-import { defaultLocale } from '@/types';
+import { defaultLocale, locales } from '@/types';
 
 export default async function AuthPage() {
   const supabase = createServerSupabase();
@@ -27,12 +27,15 @@ export default async function AuthPage() {
               Ready to explore? Pick a locale to go back to the demo experience:
             </p>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <Link className="button button--secondary" href={`/${defaultLocale}`}>
-                English home
-              </Link>
-              <Link className="button button--secondary" href="/fr">
-                Accueil français
-              </Link>
+              {locales.map((locale) => (
+                <Link key={locale} className="button button--secondary" href={`/${locale}`}>
+                  {locale === 'fr'
+                    ? 'Accueil français'
+                    : locale === 'es'
+                      ? 'Inicio español'
+                      : 'English home'}
+                </Link>
+              ))}
             </div>
           </section>
         </main>

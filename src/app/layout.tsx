@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import './globals.css';
+import { defaultLocale } from '@/types';
 
 export const metadata: Metadata = {
   title: 'Respire Supabase Starter',
@@ -14,7 +15,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang={defaultLocale}>
       <body>{children}</body>
     </html>
   );
